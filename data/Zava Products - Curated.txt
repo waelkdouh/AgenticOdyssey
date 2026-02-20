@@ -1,0 +1,18 @@
+SKU	Product	Product Line	Category	Total Orders	Total Units	Total Revenue	Total Cost	Gross Profit	Margin %	Avg Selling Price	Unit Cost
+ZCF-PR-ETJ	Field Premium Extreme Temp Jacket	Field	Outerwear	122	1903	"$488,459"	"$167,464"	"$320,995"	65.7%	$257	 $168.68 
+ZCF-PR-LEG	Field Premium Performance Leggings	Field	Bottoms	206	2789	"$439,907"	"$145,028"	"$294,879"	67.0%	$158	 $105.73 
+ZCF-PR-LST	Field Premium Long Sleeve Top	Field	Tops	249	2969	"$411,575"	"$133,605"	"$277,970"	67.5%	$139	 $93.62 
+ZCF-PR-SST	Field Premium Short Sleeve Top	Field	Tops	249	2690	"$324,693"	"$104,910"	"$219,783"	67.7%	$121	 $81.70 
+ZCF-EL-LEG	Field Elite Performance Leggings	Field	Bottoms	202	2943	"$323,293"	"$111,834"	"$211,459"	65.4%	$110	 $71.85 
+ZCF-EL-SST	Field Elite Short Sleeve Top	Field	Tops	247	4096	"$298,561"	"$102,400"	"$196,161"	65.7%	$73	 $47.89 
+ZCF-RC-TOP	Field Recovery Compression Top	Field	Tops	101	2000	"$237,296"	"$80,000"	"$157,296"	66.3%	$119	 $78.65 
+ZCF-EL-LST	Field Elite Long Sleeve Top	Field	Tops	227	2480	"$204,589"	"$69,440"	"$135,149"	66.1%	$82	 $54.50 
+ZCF-ST-ETJ	Field Standard Extreme Temp Jacket	Field	Outerwear	105	919	"$169,697"	"$59,735"	"$109,962"	64.8%	$185	 $119.65 
+ZCF-ST-CYC	Field Standard Cycling Jersey	Field	Tops	87	1696	"$154,935"	"$55,968"	"$98,967"	63.9%	$91	 $58.35 
+ZCF-ST-LST	Field Standard Long Sleeve Top	Field	Tops	150	2717	"$147,928"	"$54,340"	"$93,588"	63.3%	$54	 $34.45 
+ZCF-ST-TRJ	Field Standard Track Jacket	Field	Outerwear	50	962	"$132,536"	"$46,176"	"$86,360"	65.2%	$138	 $89.77 
+ZCF-PR-CYC	Field Premium Cycling Jersey	Field	Tops	65	858	"$119,275"	"$39,468"	"$79,807"	66.9%	$139	 $93.01 
+ZCF-PR-RVS	Field Premium Running Vest	Field	Tops	75	1084	"$109,245"	"$36,856"	"$72,389"	66.3%	$101	 $66.78 
+ZCF-PR-TRJ	Field Premium Track Jacket	Field	Outerwear	49	514	"$105,175"	"$34,952"	"$70,223"	66.8%	$205	 $136.62 
+ZCF-ST-SST	Field Standard Short Sleeve Top	Field	Tops	122	1950	"$87,955"	"$33,150"	"$54,805"	62.3%	$45	 $28.11 
+ZCF-ST-RVS	Field Standard Running Vest	Field	Tops	75	665	"$42,659"	"$15,295"	"$27,364"	64.1%	$64	 $41.15 
