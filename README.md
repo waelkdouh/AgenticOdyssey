@@ -1,42 +1,59 @@
-# Agentic AI with AgenticOdyssey - Hands-on Workshop (Labs 1–3)
+# AgenticOdyssey
 
-This repository contains a 3-lab, Python-first workshop for building, orchestrating, and evaluating AI agents using **Microsoft Foundry**.
+Agentic workshop/demo repository spanning **Microsoft Foundry**, **Copilot Studio**, and **Agent Framework**.
 
-## Labs
-- **Lab 1 (Portal):** Build a persistent agent (**ProductInventoryManager**) in Microsoft Foundry (no code)
-- **Lab 2 (Python):** Reuse the Lab 1 agent from code and orchestrate multiple agents
-- **Lab 3 (Python):** Evaluate agent quality using the Azure AI Evaluation SDK
+## Repository Status
+This repo is being rebaselined. Content and structure may change as new specs are introduced.
 
-## Quickstart (Codespaces / Devcontainer)
-1. Open this repo in GitHub Codespaces (or locally in VS Code using the Dev Container).
-2. When the container finishes, open a terminal and authenticate:
-   ```bash
-   az login
-   ```
-3. Copy `.env.example` to `.env` and fill in your values.
-4. Follow the lab folders under `labs/`.
+## Spec-Kit: From Spec -> Tasks
+Use this flow to turn a feature idea into executable tasks.
 
-## Repo Layout
-- `.devcontainer/` — Codespaces-ready environment
-- `labs/` — student-facing lab materials + notebooks
-- `docs/screenshots/` — drop screenshots here for slides/handouts
-- `common/` — shared setup/troubleshooting guides
+1. **Start on a feature branch**
+   - `git checkout -b <feature-branch>`
 
-> Note: This repo intentionally **does not** include GitHub Actions for running Lab 3.
+2. **Create the feature spec**
+   - In chat: `/speckit.specify <feature description>`
+   - Output: `.specify/specs/<feature-id>/spec.md`
 
-## Optional: Spec-Kit Workflow
-This repository now includes a lightweight Spec-Kit scaffold for spec-driven changes.
+3. **Clarify requirements (optional but recommended)**
+   - In chat: `/speckit.clarify`
+   - Updates: `.specify/specs/<feature-id>/spec.md`
 
-- Constitution: `.specify/memory/constitution.md`
-- Templates: `.specify/templates/`
-- Feature specs: `.specify/specs/<feature-id>/`
-- Copilot command prompts: `.github/agents/speckit.*.md`
+4. **Generate technical plan**
+   - In chat: `/speckit.plan`
+   - Output: `.specify/specs/<feature-id>/plan.md`
 
-Typical flow:
-1. `/speckit.constitution`
-2. `/speckit.specify`
-3. `/speckit.clarify` (optional)
-4. `/speckit.plan`
-5. `/speckit.tasks`
-6. `/speckit.analyze` (optional)
-7. `/speckit.implement`
+5. **Generate implementation tasks**
+   - In chat: `/speckit.tasks`
+   - Output: `.specify/specs/<feature-id>/tasks.md`
+
+6. **Execute implementation**
+   - In chat: `/speckit.implement`
+
+## New-Spec Starter Prompt (Copy/Paste)
+Use this directly in chat to kick off a new feature spec:
+
+```text
+/speckit.specify Create a new feature called "<feature-name>".
+Problem to solve: <what problem this feature solves>.
+Target users: <who benefits>.
+In scope: <key capabilities>.
+Out of scope: <explicit exclusions>.
+Success criteria: <measurable outcomes>.
+Constraints: <tech/business/compliance constraints>.
+```
+
+## Customer-Demo Wake-Up (No Strategery)
+```text
+Wake-up (customer demo mode):
+1) Use current filesystem state only.
+2) Confirm branch/worktree:
+   - git --no-pager branch --show-current
+   - git --no-pager status --short
+3) Focus outputs on:
+   - end-user "aha" insights
+   - churn/retention actions
+   - Copilot Studio topic design
+   - click-by-click steps in https://copilotstudio.preview.microsoft.com/
+4) Keep outputs concise, business-first, and demo-ready.
+```
