@@ -156,7 +156,7 @@ If additional synthesized or derived fields are required:
 ## 7. Non-Functional Requirements
 
 - Outputs should be understandable by non-technical business leaders.
-- Exercises must be Level 200 with optional Level 300 complexity.
+- Exercises must be Level 300 with optional Level 400 complexity.
 - Demo time constraints:
   - Copilot Studio ≤ 30 minutes
   - Foundry ≤ 60 minutes
@@ -177,7 +177,7 @@ Must:
   - Customer health explanation
   - Recommended actions
 - Use data derived from the Excel file
-- Include Level 300 optional extensions
+- Include Level 400 optional extensions
 
 ---
 
@@ -187,7 +187,7 @@ Must:
 
 - Compute RFM values, tiers, and simple health indicators
 - Use the simplest path to derive fields from the Excel file
-- Include optional Level 300 extensions such as:
+- Include optional Level 400 extensions such as:
   - Customer Health Index
   - Data visualization
   - Additional segment logic
@@ -228,7 +228,7 @@ Must:
 
 ---
 
-## Appendix A — Technical Detail (Optional Level 300)
+## Appendix A — Technical Detail (Optional Level 400)
 
 - RFM formulas  
 - Optional CHI model  

@@ -2,58 +2,62 @@
 
 ## Technical Scope
 - Target areas (impacted paths):
-  - `README.md` — overhaul as workshop Getting Started entry point with top-level flow and TOC.
-  - `labs/customer-lifecycle/level-200/` — baseline learner flows and required outputs:
-    - `copilot-studio.md` (full click-by-click navigate/click/type guidance),
+  - `README.md` — keep as workshop Getting Started entry point with TOC and top-level phase flow.
+  - `labs/customer-lifecycle/level-300/` — required baseline learner flows and deliverables:
+    - `copilot-studio.md` (explicit build/configure + prompt execution; click-by-click navigate/click/type),
     - `foundry.md`,
-    - `agent-framework.md`,
+    - `agent-framework.md` (explicit build/configure alert workflow + proactive alert demo),
     - `output-contract.md`.
-  - `labs/customer-lifecycle/level-300/extensions.md` — optional advanced practice only, explicitly outside pass/fail.
-  - `docs/customer-lifecycle/learner-guide.md` — reinforce numbered learner instructions and recovery guidance.
-  - `docs/customer-lifecycle/facilitator-guide.md` — instructor rubric, timing, and L100/L200/L300 boundaries.
-  - `common/customer-lifecycle/` — shared logic and language:
+  - `labs/customer-lifecycle/level-400/extensions.md` — optional after-class complexity extensions only.
+  - `docs/customer-lifecycle/learner-guide.md` — learner-facing baseline guidance and level boundaries.
+  - `docs/customer-lifecycle/facilitator-guide.md` — instructor timing, rubric, and scope-control guidance.
+  - `common/customer-lifecycle/` — shared logic and terminology:
     - `signal-dictionary.md`,
-    - `risk-rules.md` (2+ negative signals rule),
+    - `risk-rules.md` (2+ negative signals),
     - `action-mapping.md`.
-  - `.specify/specs/customer-lifecycle/` — maintain spec/plan/task traceability.
+  - `.specify/specs/customer-lifecycle/` — keep spec/plan/tasks/traceability/validation aligned.
 - Integration points:
-  - `data/Zava Sales Data - FY2024-2026.xlsx` and `narrative.md` as canonical inputs/context.
-  - `.specify/memory/constitution.md` constraints: lab-first clarity, minimal disruption, verification required, documentation parity.
+  - `data/Zava Sales Data - FY2024-2026.xlsx` and `narrative.md` as canonical scenario inputs.
+  - `.specify/memory/constitution.md` principles: lab-first clarity, minimal disruption, verification required, documentation parity.
 
 ## Design Decisions
-- Define levels using WWL-aligned boundaries in all learner-facing docs:
-  - **L100** = foundational orientation (understand context, tour assets, no completion gate).
-  - **L200** = required hands-on baseline for workshop completion/pass (must deliver required outputs).
-  - **L300** = advanced hands-on practice that extends L100/L200, optional and excluded from pass/fail.
-- Make Copilot Studio baseline fully procedural:
-  - Use numbered steps with explicit **navigate to**, **click**, and **type** actions to remove ambiguity for first-time users.
-- Treat Level 200 output contract as non-negotiable:
-  - Required outputs remain at-risk VIP/Gold identification, plain-language explanation, recommended action, and portfolio summary (tier counts, at-risk counts, at-risk % by tier).
-- Keep risk logic rule-based and transparent:
-  - At-risk classification remains 2+ negative lifecycle signals to preserve explainability for business learners.
+- Preserve the current level model and pass/fail boundary:
+  - **Level 300** remains the required workshop baseline.
+  - **Level 400** remains optional complexity only and does not affect Level 300 completion.
+- Implement FR-006 as **build/configure work**, not conversation-only execution:
+  - Copilot Studio baseline requires learners to build/configure the conversational experience before running insight prompts.
+  - Agent Framework baseline requires learners to build/configure alert workflow behavior before running proactive alert demonstrations.
+- Enforce FR-012 scope policy explicitly:
+  - If in-class time is constrained, move non-essential enhancements to `labs/customer-lifecycle/level-400/extensions.md` as after-class work.
+  - Do not delete deferred content; preserve it as documented Level 400 extensions.
+  - Do not cut required Level 300 build/configuration steps from in-class flow.
+- Keep output and logic requirements unchanged for baseline consistency:
+  - Level 300 must still deliver at-risk VIP/Gold identification, plain-language explanation, recommended action, and portfolio summary (tier counts, at-risk counts, at-risk % by tier).
+  - At-risk rule remains 2+ negative lifecycle signals.
 
 ## Risks and Mitigations
-- Risk: README overhaul obscures quick start for returning users.
-  - Mitigation: keep a concise “fast path” section and stable links to existing lab docs at top-level.
-- Risk: Copilot Studio instructions still leave hidden assumptions.
-  - Mitigation: enforce a step format checklist (navigate/click/type) and include exact prompt text where typing is required.
-- Risk: L100/L200/L300 confusion causes grading disputes.
-  - Mitigation: duplicate level definitions and pass/fail boundary table in README + facilitator guide + learner guide.
-- Risk: Optional L300 work bleeds into required baseline time.
-  - Mitigation: sequence L300 sections after explicit “L200 complete” checkpoint and visually badge as optional.
-- Risk: terminology or logic drifts across labs/docs.
-  - Mitigation: source shared terms/rules from `common/customer-lifecycle/*` and run parity review before signoff.
+- Risk: FR-006 is interpreted as “run prompts only” without required setup.
+  - Mitigation: mark explicit build/configure checkpoints in `copilot-studio.md` and `agent-framework.md`, and mirror those checkpoints in learner/facilitator docs.
+- Risk: time pressure removes baseline steps instead of deferring enhancements.
+  - Mitigation: codify FR-012 scope-cut rule in facilitator guidance and require explicit “moved to Level 400” notation for every deferred item.
+- Risk: Level 300 vs Level 400 boundary drifts across files.
+  - Mitigation: maintain one consistent boundary statement in README, learner guide, facilitator guide, and Level 400 extensions page.
+- Risk: lab updates and docs diverge.
+  - Mitigation: run documentation parity validation as a release gate before signoff.
 
 ## Validation Plan
-- [ ] **README getting-started validation**: Confirm `README.md` includes TOC near top, end-to-end flow order (Copilot Studio → Foundry → Agent Framework), and clear first-step onboarding.
-- [ ] **Copilot Studio click-path validation**: Execute `labs/customer-lifecycle/level-200/copilot-studio.md` linearly and verify each baseline step explicitly states navigate/click/type with no inferred actions.
-- [ ] **L100/L200/L300 boundary validation**: Verify all three definitions match WWL framing verbatim and that only L200 criteria are tied to completion/pass.
-- [ ] **Level 200 output validation**: Run baseline flow with workshop dataset and confirm four required outputs are present, including portfolio metrics (tier counts, at-risk counts, at-risk % by tier).
-- [ ] **At-risk rule test cases**: Validate examples with 0, 1, 2, and 3+ negative signals; only 2+ may be labeled at-risk.
-- [ ] **Timebox rehearsal**: Dry-run baseline sequence to confirm Copilot Studio ≤30 min, Foundry ≤60 min, Agent Framework ≤10 min.
-- [ ] **Documentation parity check**: Verify behavior/wording changes in labs are reflected in `README.md`, learner guide, and facilitator guide.
+- [ ] **FR-006 lab build/config validation (Copilot Studio)**: Verify `labs/customer-lifecycle/level-300/copilot-studio.md` includes explicit baseline steps to build/configure the Copilot Studio experience (navigate/click/type), then run insight prompts.
+- [ ] **FR-006 lab build/config validation (Agent Framework)**: Verify `labs/customer-lifecycle/level-300/agent-framework.md` includes explicit baseline steps to build/configure the Agent Framework alert workflow, then run proactive alert demonstrations.
+- [ ] **FR-006 documentation parity validation**: Verify `README.md`, `docs/customer-lifecycle/learner-guide.md`, and `docs/customer-lifecycle/facilitator-guide.md` all explicitly state that Copilot Studio and Agent Framework require build/configuration in Level 300 (not conversation-only use).
+- [ ] **FR-012 scope-cut policy validation**: Verify facilitator and learner docs state that non-essential cuts move to Level 400 after-class extensions and are not deleted; confirm `labs/customer-lifecycle/level-400/extensions.md` is the receiving path.
+- [ ] **Level model validation**: Verify Level 300 baseline + Level 400 optional complexity language is present and consistent across impacted paths, with Level 300 as the only completion baseline.
+- [ ] **Baseline output validation**: Run Level 300 flow and confirm required outputs: at-risk VIP/Gold identification, plain-language explanation, recommended action, and portfolio summary (tier counts, at-risk counts, at-risk % by tier).
+- [ ] **Risk-rule validation**: Validate 0/1/2/3+ negative signal examples and confirm only customers with 2+ negative signals are labeled at-risk.
+- [ ] **Timebox rehearsal**: Confirm baseline can be delivered within workshop constraints (Copilot Studio ≤30 min, Foundry ≤60 min, Agent Framework ≤10 min).
 
 ## Rollout Notes
-- Deliver in two passes: (1) required L200 + README/doc updates, (2) optional L300 refinements.
-- Keep updates additive and backward-compatible with current lab assets.
-- Communicate instructor enforcement rule: workshop completion is L200-only; L300 remains optional enrichment.
+- Implement in two passes to reduce disruption:
+  - Pass 1: lock Level 300 baseline build/config requirements and update README + learner/facilitator docs.
+  - Pass 2: refine and expand Level 400 after-class extensions without changing Level 300 pass/fail.
+- Keep changes additive and backward-compatible with current repository paths and existing lab assets.
+- Require explicit communication to instructors: scope cuts are deferrals to Level 400, not deletions from the learning pathway.

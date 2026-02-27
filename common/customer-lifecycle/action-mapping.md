@@ -11,7 +11,7 @@ Recommended human actions tied to observed risk patterns.
 | Relationship narrowing | Recency + Mix | 1) Cross-sell discovery, 2) Portfolio recommendation, 3) Executive sponsor touchpoint | Account owner | Outreach in 3 business days |
 | Broad deterioration | 3+ across Recency/Frequency/Spend/Margin/Mix | 1) Escalated retention plan, 2) Weekly health checkpoint, 3) Leadership visibility note | Account owner + Manager | Start same week |
 
-## Level 200 Usage
+## Level 300 Usage
 - Select one primary action bundle per at-risk VIP/Gold customer.
 - Explain action in plain business language linked to triggered signals.
-- Do not introduce predictive probability language in Level 200.
+- Do not introduce predictive probability language in Level 300.

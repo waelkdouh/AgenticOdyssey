@@ -1,7 +1,7 @@
 # Derived Fields from Zava Sales Data - FY2024-2026.xlsx
 
 All baseline lifecycle outputs must be derived from the provided workbook only.  
-No external customer data sources are allowed in Level 200.
+No external customer data sources are allowed in Level 300 baseline exercises.
 
 ## Source-to-Derived Mapping
 | Derived field | Source columns (workbook) | Transformation logic | Business interpretation |

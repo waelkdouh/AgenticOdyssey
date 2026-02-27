@@ -3,31 +3,39 @@
 ## Storyline Alignment
 - Business problem: detect early lifecycle decline in high-value customers and act sooner.
 - Primary audience: mixed technical levels, business-first framing.
-- Baseline scope: Level 200 only; Level 300 is optional enrichment.
+- Baseline scope: Level 300 only; Level 400 is optional enrichment.
 
 ## Canonical Level Definitions (Use Verbatim)
 - **L100 (foundational orientation):** Understand scenario context, data sources, and shared vocabulary. No pass/fail completion gate.
-- **L200 (required baseline hands-on competency):** Deliver required workshop outputs for completion/pass.
-- **L300 (advanced hands-on practice, WWL-aligned):** Advanced hands-on practice that builds on L100 and L200; optional enrichment and excluded from pass/fail.
+- **L200 (intermediate):** Learners should demonstrate intermediate tool fluency before baseline grading.
+- **L300 (advanced hands-on baseline, WWL-aligned):** Advanced hands-on practice that builds on L100 and L200; this is the required workshop exercise level for completion/pass.
+- **L400 (optional complexity):** Extension work that deepens L300 outcomes and is excluded from pass/fail.
 
-## Grading Enforcement (L200-Only)
-- Workshop pass/fail is based on **L200 outputs only**.
-- L300 content must not be used as a requirement to pass.
-- If a learner completes all Level 200 outputs in `labs/customer-lifecycle/level-200/output-contract.md`, mark baseline as pass.
-- If any L200 mandatory output is missing, mark baseline as not yet complete.
+## Grading Enforcement (L300-Only)
+- Workshop pass/fail is based on **L300 outputs only**.
+- L400 content must not be used as a requirement to pass.
+- If a learner completes all Level 300 outputs in `labs/customer-lifecycle/level-300/output-contract.md`, mark baseline as pass.
+- If any L300 mandatory output is missing, mark baseline as not yet complete.
+- Level 300 completion requires build/configure checkpoints in both Copilot Studio and Agent Framework (not conversation-only execution on prebuilt assets).
 
 ## Phase Checkpoints (Timeboxed)
 | Phase | Target time | Facilitator checkpoint |
 |---|---:|---|
-| Copilot Studio | <=30 min | Learner produced at-risk VIP/Gold list with plain-language explanations |
+| Copilot Studio | <=30 min | Learner built/configured baseline copilot artifacts, then produced at-risk VIP/Gold list with plain-language explanations |
 | Foundry | <=60 min | Learner produced structured signals, 2+ rule output, and portfolio summary |
-| Agent Framework | <=10 min | Learner showed explain-only alerts with mapped actions |
+| Agent Framework | <=10 min | Learner built/configured alert workflow, then showed explain-only alerts with mapped actions |
 
 ## Timing Rubric
 - Copilot Studio: **<= 30 minutes**
 - Foundry: **<= 60 minutes**
 - Agent Framework: **<= 10 minutes**
-- If a team overruns, prioritize completion of remaining L200 mandatory outputs before any L300 activity.
+- If a team overruns, prioritize completion of remaining L300 mandatory outputs before any L400 activity.
+
+## Scope-Cut Policy (FR-012)
+- If time pressure requires scope cuts, defer only non-essential items.
+- Move each deferred item to `labs/customer-lifecycle/level-400/extensions.md` as an explicitly labeled after-class extension.
+- Do **not** delete deferred content from the learning pathway.
+- Do **not** remove required Level 300 build/configuration steps from in-class delivery.
 
 ## Misclassification Mitigation Prompts
 Use these prompts when learners over-classify:

@@ -4,9 +4,11 @@ Shared vocabulary for all customer-lifecycle labs and guides.
 
 ## Canonical Learning Levels and Pass/Fail Boundary
 - **L100 (foundational orientation):** Understand scenario context, data sources, and shared vocabulary. No pass/fail completion gate.
-- **L200 (required baseline hands-on competency):** Deliver the required workshop outputs for completion/pass.
-- **L300 (advanced hands-on practice, WWL-aligned):** Advanced hands-on practice that builds on L100 and L200; optional enrichment and excluded from pass/fail.
-- **Workshop pass/fail boundary:** **L200 is required for pass. L300 is optional and must not affect pass/fail.**
+- **L200 (intermediate):** Build practical familiarity with tooling and transformation patterns before baseline grading.
+- **L300 (advanced hands-on baseline, WWL-aligned):** Advanced hands-on practice that builds on L100 and L200; this is the required workshop exercise level for completion/pass.
+- **L400 (optional complexity):** Extension work that deepens L300 outcomes and is excluded from pass/fail.
+- **Workshop pass/fail boundary:** **L300 is required for pass. L400 is optional and must not affect pass/fail.**
+- **Canonical pathing:** `labs/customer-lifecycle/level-300/` is the required baseline path; `labs/customer-lifecycle/level-400/` is the optional complexity path for after-class extensions.
 
 ## Standard Terms
 | Term | Definition |
@@ -26,6 +28,6 @@ Shared vocabulary for all customer-lifecycle labs and guides.
 | Mix | Product category diversity or strategic SKU participation | Category count or strategic SKU share declines materially | Narrower mix can indicate shrinking relationship depth. |
 
 ## Tier Handling Notes
-- Level 200 baseline triage focuses on **VIP and Gold**.
+- Level 300 baseline triage focuses on **VIP and Gold**.
 - Silver and Bronze remain in portfolio totals for context.
 - Tier naming must remain unchanged across all artifacts.

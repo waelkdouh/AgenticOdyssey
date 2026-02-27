@@ -3,7 +3,7 @@
 ## Rule ID
 `RISK-2PLUS-NEGATIVE-SIGNALS`
 
-## Baseline Classification Contract (Level 200)
+## Baseline Classification Contract (Level 300)
 1. Evaluate all five lifecycle signals: recency, frequency, spend, margin, and mix.
 2. Mark each signal as `negative` or `not negative`.
 3. Count negatives as `negative_signal_count`.
@@ -11,7 +11,7 @@
    - `at_risk` when `negative_signal_count >= 2`
    - `watch` when `negative_signal_count = 1`
    - `healthy` when `negative_signal_count = 0`
-5. Level 200 intervention outputs are required for at-risk VIP/Gold only.
+5. Level 300 intervention outputs are required for at-risk VIP/Gold only.
 
 ## Explicit Gating Requirement
 A customer **must not** be labeled at-risk from a single signal.  

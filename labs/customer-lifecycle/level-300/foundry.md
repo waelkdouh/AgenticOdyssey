@@ -1,14 +1,14 @@
-# Level 200 Lab: Microsoft Foundry (60 Minutes)
+# Level 300 Lab: Microsoft Foundry (60 Minutes)
 
 ## Goal
-Build structured lifecycle scoring outputs and enforce the Level 200 at-risk rule (`negative_signal_count >= 2`) before handing results to Agent Framework.
+Build structured lifecycle scoring outputs and enforce the Level 300 at-risk rule (`negative_signal_count >= 2`) before handing results to Agent Framework.
 
 ## Required Inputs
 - `data/Zava Sales Data - FY2024-2026.xlsx`
 - `data/customer-lifecycle/derived-fields.md`
 - `common/customer-lifecycle/signal-dictionary.md`
 - `common/customer-lifecycle/risk-rules.md`
-- `labs/customer-lifecycle/level-200/output-contract.md`
+- `labs/customer-lifecycle/level-300/output-contract.md`
 
 ## Step-by-Step (Navigate / Click / Type)
 1. Open your Foundry project.
@@ -25,7 +25,7 @@ Build structured lifecycle scoring outputs and enforce the Level 200 at-risk rul
 3. Open a notebook/query workspace for transformation.
    - **Navigate:** Go to your project’s notebook, dataflow, or query tool.
    - **Click:** Create new analysis artifact.
-   - **Type:** Title it `level-200-lifecycle-baseline`.
+   - **Type:** Title it `level-300-lifecycle-baseline`.
 
 4. Create derived lifecycle fields.
    - **Type:** Implement derived fields from `data/customer-lifecycle/derived-fields.md` for recency, frequency, spend trend, margin trend, and mix trend.
@@ -67,7 +67,7 @@ Build structured lifecycle scoring outputs and enforce the Level 200 at-risk rul
 
 11. Save outputs for downstream lab.
    - **Click:** Persist/export customer-level baseline table, VIP/Gold subset, and portfolio summary.
-   - **Verify:** Outputs are ready for `labs/customer-lifecycle/level-200/agent-framework.md`.
+   - **Verify:** Outputs are ready for `labs/customer-lifecycle/level-300/agent-framework.md`.
 
 ## Timebox Guidance
 1. **0-10 min:** Load data and inspect schema.
