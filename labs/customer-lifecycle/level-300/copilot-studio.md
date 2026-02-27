@@ -1,7 +1,19 @@
 # Level 300 Lab: Copilot Studio (30 Minutes)
 
 ## Goal
-Build/configure the Level 300 Copilot Studio workshop artifact, then produce required baseline outputs: at-risk VIP/Gold identification, plain-language explanations, recommended actions, and portfolio summary metrics.
+Build/configure a Copilot Studio artifact, then use it to deliver the Level 300 baseline outputs:
+1. at-risk VIP/Gold identification,
+2. plain-language risk explanation,
+3. recommended human action,
+4. portfolio summary metrics.
+
+## Why this lab matters (Story Arc Mapping)
+| Story arc outcome | What you produce in this lab |
+|---|---|
+| Identify who needs attention now | At-risk VIP/Gold list with `negative_signal_count >= 2` |
+| Explain why risk is emerging | Plain-language explanation per at-risk customer |
+| Recommend next human step | One action recommendation per at-risk customer |
+| Provide leadership visibility | Tier counts, at-risk counts, and at-risk % by tier |
 
 ## Required Inputs
 - `data/Zava Sales Data - FY2024-2026.xlsx`
@@ -10,78 +22,97 @@ Build/configure the Level 300 Copilot Studio workshop artifact, then produce req
 - `common/customer-lifecycle/risk-rules.md`
 - `labs/customer-lifecycle/level-300/output-contract.md`
 
-## Step-by-Step (Navigate / Click / Type)
-1. Open Copilot Studio and select environment.
-   - **Navigate:** Go to `https://copilotstudio.preview.microsoft.com/`.
-   - **Click:** Select your workshop environment.
-   - **Verify:** Copilot Studio home is visible.
+## Preview UI Note (Important)
+Use these UI anchors for this lab:
+- Left nav: **Agents**
+- In an opened agent: **Overview**, **Knowledge**, **Activity**
 
-2. Create or open a Level 300 workshop copilot artifact.
-   - **Click:** New copilot (or open facilitator-provided draft for editing).
-   - **Type:** Name `Customer Lifecycle L300 Baseline`.
+If your tenant labels differ slightly, follow the intent of each step.
+
+## Phase 1 - Build/Configure Artifact (0-10 min)
+1. Open portal and select environment.
+   - **Navigate:** `https://copilotstudio.preview.microsoft.com/`
+   - **Click:** Environment selector and choose workshop environment.
+   - **Verify:** Copilot Studio home loads.
+
+2. Create (or open editable) copilot.
+   - **Click:** Left nav **Agents**.
+   - **Click:** Create/New agent (or open facilitator draft with edit rights).
+   - **Type:** Name: `Customer Lifecycle L300 Baseline`
    - **Click:** Create/Open.
-   - **Verify:** Copilot build canvas is editable.
+   - **Verify:** Agent opens and **Overview** and **Knowledge** tabs are available.
 
-3. Configure baseline instruction contract before conversation testing.
-   - **Click:** Instructions / System behavior panel.
-   - **Type:** Add instruction text that enforces:
-     1. use workshop dataset + derived fields only,
-     2. classify `at_risk` only when `negative_signal_count >= 2`,
-     3. keep 1-signal customers as `watch`,
-     4. return business-language explanations and human actions.
+3. Configure behavior contract (required baseline config).
+   - **Click:** Top tab **Overview**.
+   - **Click:** Instructions / System message field.
+   - **Type (paste):**
+     ```text
+     Use only workshop-provided customer lifecycle data context.
+     Apply risk rule exactly:
+     - at_risk when negative_signal_count >= 2
+     - watch when negative_signal_count = 1
+     - healthy when negative_signal_count = 0
+     For at-risk VIP/Gold customers, return:
+     customer_id, tier, triggered_signals, negative_signal_count,
+     plain-language explanation, recommended human action.
+     Also provide tier counts, at-risk counts, and at-risk % by tier.
+     ```
    - **Click:** Save.
-   - **Verify:** Instruction panel shows saved rule language.
+   - **Verify:** Saved instructions are visible.
 
-4. Configure required output shape for Level 300 responses.
-   - **Click:** Topics/Prompt behavior (or equivalent response settings).
-   - **Type:** Require fields for at-risk outputs: `customer_id`, `tier`, `triggered_signals`, `negative_signal_count`, explanation, recommended_action.
+4. Add knowledge/data context.
+   - **Click:** Top tab **Knowledge**.
+   - **Click:** Add source.
+   - **Type/Select:** Attach workshop source (Excel file or facilitator-provided prepared data context).
+   - **Click:** Save/Connect.
+   - **Verify:** Source appears as active/connected.
+
+5. Save (and publish draft if your UI requires it before testing).
    - **Click:** Save.
-   - **Verify:** Output expectations are part of configured artifact.
+   - **Click:** Publish (if enabled/required in your tenant).
+   - **Verify:** No blocking validation errors.
 
-5. Create a fresh test conversation from configured artifact.
-   - **Navigate:** Open test chat panel.
-   - **Click:** New conversation / Reset.
+## Phase 2 - Run Guided Conversation (10-27 min)
+6. Start fresh test chat.
+   - **Navigate:** **Overview** test chat panel (or equivalent test pane in your tenant).
+   - **Click:** New chat / Reset.
    - **Type:** `Start Level 300 customer lifecycle analysis for VIP and Gold tiers only.`
    - **Click:** Send.
 
-6. Confirm configured rule is active.
-   - **Type:** `Confirm the risk gate exactly: at_risk only when negative_signal_count >= 2; watch when =1; healthy when =0.`
+7. Confirm rule lock (quality gate).
+   - **Type:** `Confirm the exact risk gate and statuses: at_risk >=2, watch =1, healthy =0.`
    - **Click:** Send.
-   - **Verify:** Assistant echoes exact 0/1/2+ contract.
+   - **Verify:** Response matches 0/1/2+ contract exactly.
 
-7. Request at-risk VIP/Gold identification.
-   - **Type:** `List all customers where tier is VIP or Gold and risk_status is at_risk. Include customer_id, tier, triggered_signals, and negative_signal_count. Exclude any record with negative_signal_count < 2.`
+8. Generate at-risk VIP/Gold list (Story arc: who needs attention).
+   - **Type:** `List VIP/Gold customers with risk_status = at_risk. Include customer_id, tier, triggered_signals, negative_signal_count. Exclude any row with negative_signal_count < 2.`
    - **Click:** Send.
-   - **Verify:** Every returned at-risk customer has `negative_signal_count >= 2`.
+   - **Verify:** Every returned at-risk row has `negative_signal_count >= 2`.
 
-8. Request plain-language explanations and mapped actions.
-   - **Type:** `For each listed at-risk VIP/Gold customer, provide a plain business explanation of risk drivers and one recommended human action with a short justification.`
+9. Generate explanations + actions (Story arc: why + what next).
+   - **Type:** `For each listed at-risk VIP/Gold customer, provide a plain-language explanation and one recommended human action with brief justification.`
    - **Click:** Send.
-   - **Verify:** Each customer has readable explanation and one concrete action.
+   - **Verify:** Every customer has explanation + action.
 
-9. Request mandatory portfolio summary metrics.
-   - **Type:** `Provide a portfolio summary table with tier counts, at-risk counts, and at-risk percentage by tier for VIP, Gold, Silver, and Bronze.`
-   - **Click:** Send.
-   - **Verify:** All three metrics are present for each tier.
+10. Generate portfolio summary (Story arc: leadership visibility).
+    - **Type:** `Provide a portfolio summary table with tier counts, at-risk counts, and at-risk percentage by tier for VIP, Gold, Silver, and Bronze.`
+    - **Click:** Send.
+    - **Verify:** All 3 metrics appear for each tier.
 
-10. Run boundary check for 0/1/2/3+ signals.
-    - **Type:** `Show one example each for customers with 0, 1, 2, and 3+ negative signals and confirm risk_status for each example according to the 2+ rule.`
+## Phase 3 - Validate in Activity (27-30 min)
+11. Run boundary validation.
+    - **Type:** `Show one example each for 0, 1, 2, and 3+ negative signals and confirm risk_status for each.`
     - **Click:** Send.
     - **Verify:** 0=healthy, 1=watch, 2+=at_risk.
 
-11. Save Level 300 evidence.
-    - **Click:** Export/copy configured instruction screenshot plus conversation outputs.
-    - **Type:** Save notes with sections: Build/config checkpoints, At-risk list, explanations/actions, portfolio summary, boundary check.
-    - **Verify:** Evidence includes both build/configuration and required Level 300 outputs from `output-contract.md`.
-
-## Timebox Guidance
-1. **0-10 min:** Build/configure copilot artifact and instruction contract.
-2. **10-20 min:** Run at-risk listing plus explanations/actions.
-3. **20-27 min:** Produce portfolio summary.
-4. **27-30 min:** Run boundary check and save evidence.
-
-## Guardrails
-- Level 300 requires build/configuration before prompt execution (not conversation-only use of prebuilt flow).
-- Use only workshop-provided inputs.
-- Never label 0/1-signal customers as at-risk.
-- Keep language business-friendly.
+12. Use Activity as the validation source (no export required for this lab).
+    - **Click:** Top tab **Activity**.
+    - **Click:** Open one of your completed conversations.
+    - **Click:** Toggle view between **Transcript + map view** and **map view**.
+    - **Compare:** Use this conversation as your source to confirm all required outputs in `labs/customer-lifecycle/level-300/output-contract.md`:
+      1. at-risk VIP/Gold list with `negative_signal_count >= 2`,
+      2. plain-language explanations,
+      3. recommended human actions,
+      4. portfolio summary metrics,
+      5. 0/1/2/3+ boundary check.
+    - **Verify:** You can locate each required output in Activity-backed conversation history.
