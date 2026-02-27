@@ -22,7 +22,7 @@
 | Phase | Target time | Facilitator checkpoint |
 |---|---:|---|
 | Copilot Studio | <=30 min | Learner built/configured baseline copilot artifacts, then produced at-risk VIP/Gold list with plain-language explanations |
-| Foundry | <=60 min | Learner produced structured signals, 2+ rule output, and portfolio summary |
+| Foundry | <=60 min | Learner used New Foundry flow (Build -> Data, Build -> Workflows), produced all 4 agent outputs, and enforced `tier='VIP' AND recency_days > 60` plus 2+ risk gate |
 | Agent Framework | <=10 min | Learner built/configured alert workflow, then showed explain-only alerts with mapped actions |
 
 ## Timing Rubric
@@ -52,3 +52,20 @@ Use these prompts when learners over-classify:
 ## Documentation Parity Notes
 - Labs and guides use shared terms: customer health, risk signals, tiers, actions.
 - Baseline logic in all phases must match `common/customer-lifecycle/risk-rules.md`.
+
+## Foundry Assessment Rubric (Required Evidence)
+1. **Portal/auth assumptions verified**
+   - New Foundry toggle enabled.
+   - No Project API key path used.
+2. **Navigation path evidence**
+   - Optional project creation path shown: Start building -> Design workflow.
+   - Data ingestion performed via Build -> Data.
+   - Agent implementation performed via Build -> Workflows.
+3. **4-agent completion evidence**
+   - Agent 1 output: `agent1_rfm`
+   - Agent 2 output: `agent2_tier_health`
+   - Agent 3 output: `agent3_vip_recency_alerts` with exact rule text `tier='VIP' AND recency_days > 60`
+   - Agent 4 output: `agent4_news_action_eval` with scope/exception handling
+4. **Threshold consistency enforcement**
+   - Agent 3 threshold evidence field shows 60 days.
+   - Rule text in learner output matches `common/customer-lifecycle/risk-rules.md` exactly.

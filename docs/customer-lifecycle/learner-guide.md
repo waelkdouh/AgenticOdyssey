@@ -21,7 +21,7 @@ Pass/fail boundary:
 | Phase | Outcome artifact |
 |---|---|
 | Copilot Studio | Built/configured Copilot Studio baseline artifact + conversational at-risk explanation/action outputs |
-| Foundry | Structured risk scoring table with 2+ signal rule |
+| Foundry | Multi-agent workflow outputs (RFM, tier/health, VIP recency alert using `tier='VIP' AND recency_days > 60`, news-based action evaluation) with 2+ signal rule alignment |
 | Agent Framework | Built/configured Agent Framework baseline alert workflow + proactive explain-only alerts |
 
 ## Run Sequence (Use This Order)
@@ -34,6 +34,15 @@ Pass/fail boundary:
 - In Copilot Studio, you must **build/configure** the workshop copilot/topic instructions before running insight prompts.
 - In Agent Framework, you must **build/configure** the workshop alert workflow (data binding, trigger gating, alert template) before running proactive alert demonstrations.
 - Running conversations against prebuilt assets without completing baseline build/configuration does not satisfy Level 300 expectations.
+
+## Foundry Navigation and Auth Checkpoints (Required)
+- Use **New Foundry** portal mode (toggle enabled).
+- Use signed-in user/project access; **do not configure Project API keys** (disabled path).
+- Follow navigation sequence:
+  1. Optional project creation: **Start building -> Design workflow**.
+  2. Data setup: **Build -> Data** (load workbook + `synthetic_regional_news_24m`).
+  3. Agent orchestration: **Build -> Workflows** (run all 4 agents with handoff chain).
+- Agent 4 must enforce synthetic news scope and exception handling (missing region, non-fictional company, malformed date, stale record).
 
 ## Baseline Rule You Must Follow
 - Count negative lifecycle signals per customer.

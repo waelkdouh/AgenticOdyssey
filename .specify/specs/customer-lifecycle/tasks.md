@@ -1,42 +1,36 @@
 # Tasks: customer-lifecycle
 
 ## Phase 1 - Foundation
-- [x] T001 Lock canonical level model and boundaries in `common/customer-lifecycle/signal-dictionary.md` so Level 300 remains required baseline and Level 400 remains optional extension path.
-- [x] T002 Codify at-risk rule examples (0/1/2/3+ negative signals, with 2+ = at-risk) in `common/customer-lifecycle/risk-rules.md` for shared downstream consistency.
-- [x] T003 Confirm Level 300 output contract in `labs/customer-lifecycle/level-300/output-contract.md` includes VIP/Gold at-risk identification, plain-language explanation, recommended action, and portfolio summary (tier counts, at-risk counts, at-risk % by tier).
-- [x] T004 Add explicit scope-cut rule language to `docs/customer-lifecycle/facilitator-guide.md` and `docs/customer-lifecycle/learner-guide.md`: non-essential in-class cuts must be moved to `labs/customer-lifecycle/level-400/extensions.md` (after-class), never deleted.
+- [x] T001 Document the canonical VIP recency threshold value and the explicit Agent 3 rule (`tier='VIP' AND recency > <threshold>`) in `common/customer-lifecycle/risk-rules.md`.
+- [x] T002 Align shared terminology in `common/customer-lifecycle/signal-dictionary.md` with the Foundry 4-agent flow (Agent 1 RFM, Agent 2 tier+health, Agent 3 thresholded VIP alert, Agent 4 news-based action evaluation).
+- [x] T003 Update `labs/customer-lifecycle/level-300/output-contract.md` to require handoff outputs for each Foundry agent, including the recency-threshold evidence field used by Agent 3.
+- [x] T004 Define synthetic news dataset scope and exception criteria in `common/customer-lifecycle/action-mapping.md` and `common/customer-lifecycle/signal-dictionary.md` (dataset name `synthetic_regional_news_24m`, last-24-month window, regional events, fictional-company references, invalid/out-of-window row handling).
 
 ## Phase 2 - Feature Delivery
-- [x] T005 Update `README.md` Getting Started flow to preserve current path model (`level-300` baseline, `level-400` extensions) and call out baseline sequence: Copilot Studio -> Foundry -> Agent Framework.
-- [x] T006 Rewrite `labs/customer-lifecycle/level-300/copilot-studio.md` with explicit numbered navigate/click/type **build/configure** steps for Copilot Studio artifacts before prompt execution (not conversation-only).
-- [x] T007 Update `labs/customer-lifecycle/level-300/foundry.md` with explicit numbered navigate/click/type baseline steps aligned to Level 300 required outputs and timebox.
-- [x] T008 Rewrite `labs/customer-lifecycle/level-300/agent-framework.md` with explicit numbered navigate/click/type **build/configure** steps for Agent Framework alert workflow artifacts before proactive alert demo (not conversation-only).
-- [x] T009 Update `docs/customer-lifecycle/learner-guide.md` to mirror Level 300 build/config expectations for Copilot Studio and Agent Framework, plus deferral-to-Level-400 scope-cut policy.
-- [x] T010 Update `docs/customer-lifecycle/facilitator-guide.md` rubric/timing guidance to enforce build/config checkpoints (Copilot Studio <=30m, Foundry <=60m, Agent Framework <=10m) and Level 300-only completion grading.
-- [x] T011 Curate `labs/customer-lifecycle/level-400/extensions.md` as the receiving location for deferred non-essential items, explicitly labeled after-class optional extensions (no impact on Level 300 pass/fail).
+- [x] T005 Revise `labs/customer-lifecycle/level-300/foundry.md` with explicit New Foundry navigation assumptions (New Foundry enabled) and the no Project API key authentication path.
+- [x] T006 Implement end-to-end Foundry Build -> Data workflow steps in `labs/customer-lifecycle/level-300/foundry.md`, including loading canonical workbook inputs plus synthetic news input with exception handling branches.
+- [x] T007 Implement Foundry Build -> Workflows steps in `labs/customer-lifecycle/level-300/foundry.md` for the full 4-agent chain and explicit inter-agent handoff mapping.
+- [x] T008 Add explicit Agent 4 synthetic-news processing instructions in `labs/customer-lifecycle/level-300/foundry.md` for scope enforcement (24 months only) and exception paths (missing region, non-fictional company, malformed date, stale record).
+- [x] T009 Mirror New Foundry navigation/auth assumptions and Build -> Data / Build -> Workflows expectations in `docs/customer-lifecycle/learner-guide.md`.
+- [x] T010 Mirror the same Foundry assumptions, checkpoints, and assessment rubric in `docs/customer-lifecycle/facilitator-guide.md`, including enforcement of the documented recency threshold and 4-agent completion evidence.
 
 ## Phase 3 - Validation and Cleanup
-- [x] T012 Update `.specify/specs/customer-lifecycle/validation.md` with FR-006 checks that `labs/customer-lifecycle/level-300/copilot-studio.md` and `labs/customer-lifecycle/level-300/agent-framework.md` each include concrete creation/configuration steps before execution steps.
-- [x] T013 Execute and record "not conversation-only" validation across `labs/customer-lifecycle/level-300/copilot-studio.md`, `labs/customer-lifecycle/level-300/agent-framework.md`, `docs/customer-lifecycle/learner-guide.md`, and `docs/customer-lifecycle/facilitator-guide.md`.
-- [x] T014 Execute and record FR-012 scope-cut validation across `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md`, and `labs/customer-lifecycle/level-400/extensions.md`, confirming deferred items are moved to Level 400 rather than removed.
-- [x] T015 Execute level-model parity validation across `README.md`, `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md`, `labs/customer-lifecycle/level-300/*.md`, and `labs/customer-lifecycle/level-400/extensions.md` to confirm `level-300` baseline + `level-400` extension consistency.
-- [x] T016 Execute baseline output/risk-rule validation against `labs/customer-lifecycle/level-300/output-contract.md`, `common/customer-lifecycle/risk-rules.md`, and facilitator scoring guidance; record evidence and remediation items in `.specify/specs/customer-lifecycle/validation.md`.
-- [x] T017 Perform final documentation reconciliation across all impacted files and close traceability links in `.specify/specs/customer-lifecycle/traceability.md` and `.specify/specs/customer-lifecycle/tasks.md`.
+- [x] T011 Add validation checklist items to `.specify/specs/customer-lifecycle/validation.md` for New Foundry toggle, no Project API key path, and presence of Build -> Data plus Build -> Workflows steps in `labs/customer-lifecycle/level-300/foundry.md`.
+- [x] T012 Execute and record validation in `.specify/specs/customer-lifecycle/validation.md` that all four Foundry agents are documented with correct sequencing and that Agent 3 uses the same recency threshold text as `common/customer-lifecycle/risk-rules.md`.
+- [x] T013 Execute and record synthetic-news validation in `.specify/specs/customer-lifecycle/validation.md` against `labs/customer-lifecycle/level-300/foundry.md` and `common/customer-lifecycle/*` for dataset scope and exception handling coverage.
+- [x] T014 Reconcile cross-doc consistency in `README.md`, `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md`, and `.specify/specs/customer-lifecycle/traceability.md` so Foundry navigation assumptions and workflow checks are traceable end-to-end.
 
 ## Dependency Notes
 - T002 depends on T001.
 - T003 depends on T001 and T002.
-- T004 depends on T001.
-- T005 depends on T001 and T004.
-- T006 depends on T001 and T003.
-- T007 depends on T001 and T003.
-- T008 depends on T001 and T003.
-- T009 depends on T005, T006, and T008.
-- T010 depends on T004, T005, T006, T007, and T008.
-- T011 depends on T004 and T010.
-- T012 depends on T006 and T008.
-- T013 depends on T009, T010, and T012.
-- T014 depends on T004 and T011.
-- T015 depends on T005 through T011.
-- T016 depends on T002, T003, T007, T008, and T010.
-- T017 depends on T013, T014, T015, and T016.
+- T004 depends on T002.
+- T005 depends on T001.
+- T006 depends on T004 and T005.
+- T007 depends on T003 and T005.
+- T008 depends on T004, T006, and T007.
+- T009 depends on T005, T006, and T007.
+- T010 depends on T005, T007, and T009.
+- T011 depends on T006 and T007.
+- T012 depends on T001, T007, and T011.
+- T013 depends on T004, T008, and T011.
+- T014 depends on T009, T010, T012, and T013.

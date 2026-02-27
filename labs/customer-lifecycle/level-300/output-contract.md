@@ -24,13 +24,21 @@ For each at-risk VIP/Gold customer:
 4. Plain-language explanation of risk drivers
 5. Mapped human action (from action mapping matrix)
 
-## C. Rule Enforcement (Required)
+## C. Foundry 4-Agent Handoff Outputs (Required)
+| Agent | Required artifact | Required fields |
+|---|---|---|
+| Agent 1 (RFM) | `agent1_rfm` | `customer_id`, `recency_days`, `frequency_90d`, `monetary_90d` |
+| Agent 2 (Tier + health) | `agent2_tier_health` | `customer_id`, `tier`, `negative_signal_count`, `risk_status`, `triggered_signals` |
+| Agent 3 (VIP threshold alert) | `agent3_vip_recency_alerts` | `customer_id`, `tier`, `recency_days`, `vip_recency_threshold_days` (=60), `agent3_rule_text` (`tier='VIP' AND recency_days > 60`), `alert_flag` |
+| Agent 4 (News action eval) | `agent4_news_action_eval` | `customer_id`, `event_id`, `event_date`, `region`, `event_scope_status`, `action_recommendation`, `action_rationale` |
+
+## D. Rule Enforcement (Required)
 - A customer with 0 signals: `healthy`
 - A customer with 1 signal: `watch`
 - A customer with 2+ signals: `at_risk`
 - Any output labeling 0/1-signal customer as at-risk is a baseline failure.
 
-## D. Pass/Fail Boundary
-- **Pass (Level 300):** Sections A+B+C fully met.
+## E. Pass/Fail Boundary
+- **Pass (Level 300):** Sections A+B+C+D fully met.
 - **Not required for pass:** Any Level 400 extension artifact.
 - **Grading rule:** L300 is the required baseline; L400 is optional enrichment and must not change pass/fail.

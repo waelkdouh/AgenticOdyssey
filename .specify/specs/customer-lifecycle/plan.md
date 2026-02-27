@@ -2,62 +2,56 @@
 
 ## Technical Scope
 - Target areas (impacted paths):
-  - `README.md` — keep as workshop Getting Started entry point with TOC and top-level phase flow.
-  - `labs/customer-lifecycle/level-300/` — required baseline learner flows and deliverables:
-    - `copilot-studio.md` (explicit build/configure + prompt execution; click-by-click navigate/click/type),
-    - `foundry.md`,
-    - `agent-framework.md` (explicit build/configure alert workflow + proactive alert demo),
-    - `output-contract.md`.
-  - `labs/customer-lifecycle/level-400/extensions.md` — optional after-class complexity extensions only.
-  - `docs/customer-lifecycle/learner-guide.md` — learner-facing baseline guidance and level boundaries.
-  - `docs/customer-lifecycle/facilitator-guide.md` — instructor timing, rubric, and scope-control guidance.
-  - `common/customer-lifecycle/` — shared logic and terminology:
+  - `README.md` (Getting Started TOC + phase flow clarity).
+  - `labs/customer-lifecycle/level-300/`:
+    - `copilot-studio.md` (explicit build/configure baseline steps),
+    - `foundry.md` (four-agent workflow, recency-threshold alert rule, New Foundry navigation assumptions),
+    - `agent-framework.md` (explicit build/configure proactive alert flow),
+    - `output-contract.md` (Level 300 required outputs).
+  - `labs/customer-lifecycle/level-400/extensions.md` (optional complexity only).
+  - `common/customer-lifecycle/`:
+    - `risk-rules.md` (2+ negative signals gate + documented VIP recency threshold),
     - `signal-dictionary.md`,
-    - `risk-rules.md` (2+ negative signals),
     - `action-mapping.md`.
-  - `.specify/specs/customer-lifecycle/` — keep spec/plan/tasks/traceability/validation aligned.
+  - `docs/customer-lifecycle/` (learner/facilitator parity for level boundaries, scope cuts, and navigation assumptions).
+  - `.specify/specs/customer-lifecycle/` (spec/plan/tasks consistency).
 - Integration points:
-  - `data/Zava Sales Data - FY2024-2026.xlsx` and `narrative.md` as canonical scenario inputs.
-  - `.specify/memory/constitution.md` principles: lab-first clarity, minimal disruption, verification required, documentation parity.
+  - Canonical internal inputs: `data/Zava Sales Data - FY2024-2026.xlsx`, `narrative.md`.
+  - Explicit FR-014 exception input: synthetic news dataset (`synthetic_regional_news_24m`) for Agent 4 only.
+  - Constitution alignment: lab-first clarity, minimal disruption, verification required, documentation parity.
 
 ## Design Decisions
-- Preserve the current level model and pass/fail boundary:
-  - **Level 300** remains the required workshop baseline.
-  - **Level 400** remains optional complexity only and does not affect Level 300 completion.
-- Implement FR-006 as **build/configure work**, not conversation-only execution:
-  - Copilot Studio baseline requires learners to build/configure the conversational experience before running insight prompts.
-  - Agent Framework baseline requires learners to build/configure alert workflow behavior before running proactive alert demonstrations.
-- Enforce FR-012 scope policy explicitly:
-  - If in-class time is constrained, move non-essential enhancements to `labs/customer-lifecycle/level-400/extensions.md` as after-class work.
-  - Do not delete deferred content; preserve it as documented Level 400 extensions.
-  - Do not cut required Level 300 build/configuration steps from in-class flow.
-- Keep output and logic requirements unchanged for baseline consistency:
-  - Level 300 must still deliver at-risk VIP/Gold identification, plain-language explanation, recommended action, and portfolio summary (tier counts, at-risk counts, at-risk % by tier).
-  - At-risk rule remains 2+ negative lifecycle signals.
+- Keep **Level 300** as the only completion baseline; keep **Level 400** strictly optional extensions.
+- Treat Copilot Studio and Agent Framework as required **build/configure** experiences (not prompt-only demos).
+- Preserve Foundry as a **four-agent workflow**:
+  1. RFM computation,
+  2. tier + simple health indicators,
+  3. VIP alert rule using **documented recency threshold**,
+  4. news-based short-term action evaluation.
+- Formalize the VIP alert condition as: `tier='VIP' AND recency > <documented_threshold>` and keep at-risk classification gated by `2+` negative signals.
+- Keep synthetic news guidance learner-visible and bounded to the **most recent 24 months**, with regional events and fictional company references (e.g., Contoso).
+- Carry forward New Foundry portal assumptions already implemented in `labs/customer-lifecycle/level-300/foundry.md` (New Foundry toggle on; project API keys disabled).
 
 ## Risks and Mitigations
-- Risk: FR-006 is interpreted as “run prompts only” without required setup.
-  - Mitigation: mark explicit build/configure checkpoints in `copilot-studio.md` and `agent-framework.md`, and mirror those checkpoints in learner/facilitator docs.
-- Risk: time pressure removes baseline steps instead of deferring enhancements.
-  - Mitigation: codify FR-012 scope-cut rule in facilitator guidance and require explicit “moved to Level 400” notation for every deferred item.
-- Risk: Level 300 vs Level 400 boundary drifts across files.
-  - Mitigation: maintain one consistent boundary statement in README, learner guide, facilitator guide, and Level 400 extensions page.
-- Risk: lab updates and docs diverge.
-  - Mitigation: run documentation parity validation as a release gate before signoff.
+- Risk: “high recency” remains ambiguous and causes inconsistent Agent 3 outputs.
+  - Mitigation: define one numeric recency threshold in `common/customer-lifecycle/risk-rules.md` and reference it from `foundry.md`.
+- Risk: Agent 4 synthetic-news input drifts outside FR-014 constraints.
+  - Mitigation: enforce schema + 24-month window checks in Foundry lab validation steps.
+- Risk: learners skip required setup and run only prebuilt artifacts.
+  - Mitigation: require explicit navigate/click/type build-config checkpoints in Copilot Studio and Agent Framework docs.
+- Risk: tenant-specific portal/auth assumptions are missed.
+  - Mitigation: keep front-loaded verification steps in `foundry.md` and mirror them in facilitator guidance.
 
 ## Validation Plan
-- [ ] **FR-006 lab build/config validation (Copilot Studio)**: Verify `labs/customer-lifecycle/level-300/copilot-studio.md` includes explicit baseline steps to build/configure the Copilot Studio experience (navigate/click/type), then run insight prompts.
-- [ ] **FR-006 lab build/config validation (Agent Framework)**: Verify `labs/customer-lifecycle/level-300/agent-framework.md` includes explicit baseline steps to build/configure the Agent Framework alert workflow, then run proactive alert demonstrations.
-- [ ] **FR-006 documentation parity validation**: Verify `README.md`, `docs/customer-lifecycle/learner-guide.md`, and `docs/customer-lifecycle/facilitator-guide.md` all explicitly state that Copilot Studio and Agent Framework require build/configuration in Level 300 (not conversation-only use).
-- [ ] **FR-012 scope-cut policy validation**: Verify facilitator and learner docs state that non-essential cuts move to Level 400 after-class extensions and are not deleted; confirm `labs/customer-lifecycle/level-400/extensions.md` is the receiving path.
-- [ ] **Level model validation**: Verify Level 300 baseline + Level 400 optional complexity language is present and consistent across impacted paths, with Level 300 as the only completion baseline.
-- [ ] **Baseline output validation**: Run Level 300 flow and confirm required outputs: at-risk VIP/Gold identification, plain-language explanation, recommended action, and portfolio summary (tier counts, at-risk counts, at-risk % by tier).
-- [ ] **Risk-rule validation**: Validate 0/1/2/3+ negative signal examples and confirm only customers with 2+ negative signals are labeled at-risk.
-- [ ] **Timebox rehearsal**: Confirm baseline can be delivered within workshop constraints (Copilot Studio ≤30 min, Foundry ≤60 min, Agent Framework ≤10 min).
+- [ ] Verify `labs/customer-lifecycle/level-300/foundry.md` still contains New Foundry navigation + auth assumptions (toggle enabled, no Project API keys).
+- [ ] Verify Foundry instructions explicitly describe all four agents and expected handoff outputs.
+- [ ] Verify `common/customer-lifecycle/risk-rules.md` documents a concrete VIP recency threshold and `foundry.md` references the same threshold text.
+- [ ] Run sample records for 0/1/2/3+ negative-signal cases and confirm only `2+` is `at_risk`.
+- [ ] Validate Agent 4 input is synthetic, learner-visible, includes regional events + fictional company references, and is constrained to last 24 months.
+- [ ] Rehearse Level 300 baseline outputs end-to-end: at-risk VIP/Gold list, plain-language explanation, recommended action, and portfolio summary.
+- [ ] Confirm Level 400 items remain optional-only and scope cuts are moved to `labs/customer-lifecycle/level-400/extensions.md`, not removed.
 
 ## Rollout Notes
-- Implement in two passes to reduce disruption:
-  - Pass 1: lock Level 300 baseline build/config requirements and update README + learner/facilitator docs.
-  - Pass 2: refine and expand Level 400 after-class extensions without changing Level 300 pass/fail.
-- Keep changes additive and backward-compatible with current repository paths and existing lab assets.
-- Require explicit communication to instructors: scope cuts are deferrals to Level 400, not deletions from the learning pathway.
+- Apply changes additively to existing lab/docs structure; avoid disruptive restructuring.
+- Update shared rule/docs first (`common/` + `labs/.../foundry.md`), then align README and facilitator/learner docs for parity.
+- Communicate one rule to instructors: Level 300 is required baseline; defer extras to Level 400.

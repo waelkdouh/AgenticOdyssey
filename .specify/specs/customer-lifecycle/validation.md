@@ -1,67 +1,51 @@
 # Validation Checklist and Evidence Record
 
-## T012 - FR-006 Build/Config Validation Rules
+## T011 - Foundry Navigation/Auth Checklist Coverage
 | Check | Status | Evidence |
 |---|---|---|
-| Copilot Studio lab includes concrete artifact creation/configuration before execution prompts | Pass | `labs/customer-lifecycle/level-300/copilot-studio.md` Steps 2-4 before Steps 5-10 |
-| Agent Framework lab includes concrete workflow creation/configuration before proactive demo | Pass | `labs/customer-lifecycle/level-300/agent-framework.md` Steps 1-5 before Step 6 |
-| Validation language explicitly rejects conversation-only baseline completion | Pass | Guardrails/constraints sections in both files |
+| New Foundry toggle check exists in Foundry lab | Pass | `labs/customer-lifecycle/level-300/foundry.md` Step 1 |
+| "No Project API key" path is explicitly documented | Pass | `labs/customer-lifecycle/level-300/foundry.md` Portal Assumptions + Step 3 |
+| Build -> Data steps are explicitly present | Pass | `labs/customer-lifecycle/level-300/foundry.md` Steps 5-6 |
+| Build -> Workflows steps are explicitly present | Pass | `labs/customer-lifecycle/level-300/foundry.md` Steps 4, 7-16 |
 
-## T013 - "Not Conversation-Only" Parity Validation
+## T012 - 4-Agent Sequencing + Recency Threshold Validation
 Artifacts checked:
-- `labs/customer-lifecycle/level-300/copilot-studio.md`
-- `labs/customer-lifecycle/level-300/agent-framework.md`
-- `docs/customer-lifecycle/learner-guide.md`
+- `common/customer-lifecycle/risk-rules.md`
+- `labs/customer-lifecycle/level-300/foundry.md`
+- `labs/customer-lifecycle/level-300/output-contract.md`
 - `docs/customer-lifecycle/facilitator-guide.md`
 
 | Validation point | Status | Findings |
 |---|---|---|
-| Learner guidance states build/configuration required in Level 300 | Pass | Learner guide section "Level 300 Build/Configure Checkpoints (Required)" |
-| Facilitator grading states build/configuration required | Pass | Facilitator guide "Grading Enforcement (L300-Only)" and checkpoint table |
-| Copilot Studio baseline is build/configure then execute | Pass | Copilot Studio Steps 2-4 then prompt execution |
-| Agent Framework baseline is build/configure then execute | Pass | Agent Framework Steps 1-5 then test run |
+| Four Foundry agents are documented in sequence | Pass | Foundry Goal + Steps 8-12 + Step 13 handoff chain |
+| Agent handoff mapping is explicit | Pass | Foundry Step 13 and output-contract Foundry handoff table |
+| Agent 3 uses same threshold text as risk rules | Pass | Exact text `tier='VIP' AND recency_days > 60` appears in both files |
+| Agent 3 threshold evidence is required in outputs | Pass | `output-contract.md` requires `vip_recency_threshold_days` + `agent3_rule_text` |
 
-## T014 - FR-012 Scope-Cut Deferral Validation
+## T013 - Synthetic News Scope + Exception Coverage Validation
 Artifacts checked:
-- `docs/customer-lifecycle/learner-guide.md`
-- `docs/customer-lifecycle/facilitator-guide.md`
-- `labs/customer-lifecycle/level-400/extensions.md`
+- `common/customer-lifecycle/signal-dictionary.md`
+- `common/customer-lifecycle/action-mapping.md`
+- `labs/customer-lifecycle/level-300/foundry.md`
 
 | Validation point | Status | Findings |
 |---|---|---|
-| Scope-cut policy says non-essential items move to Level 400 after class | Pass | Learner/facilitator explicit policy text |
-| Scope-cut policy says deferred content is not deleted | Pass | Facilitator "Scope-Cut Policy (FR-012)" and learner optional extensions notes |
-| Level 400 file provides receiving path for deferred items | Pass | Extensions section "Deferred In-Class Scope Cuts (After-Class Intake)" |
+| Dataset name is canonical (`synthetic_regional_news_24m`) | Pass | Present in all three artifacts |
+| Scope constrained to last 24 months | Pass | Present in all three artifacts |
+| Regional events + fictional-company references required | Pass | Present in Foundry guidance + common docs |
+| Exception handling covers required paths | Pass | Missing region, non-fictional company, malformed date, stale record documented and excluded from correlation |
 
-## T015 - Level Model/Pathing Parity Validation
+## T014 - Cross-Doc Consistency Validation
 Artifacts checked:
 - `README.md`
 - `docs/customer-lifecycle/learner-guide.md`
 - `docs/customer-lifecycle/facilitator-guide.md`
-- `labs/customer-lifecycle/level-300/copilot-studio.md`
-- `labs/customer-lifecycle/level-300/foundry.md`
-- `labs/customer-lifecycle/level-300/agent-framework.md`
-- `labs/customer-lifecycle/level-300/output-contract.md`
-- `labs/customer-lifecycle/level-400/extensions.md`
+- `.specify/specs/customer-lifecycle/traceability.md`
 
 | Validation point | Status | Findings |
 |---|---|---|
-| `level-300` is the required baseline path for completion | Pass | README, learner/facilitator guides, output contract |
-| `level-400` is optional complexity and excluded from pass/fail | Pass | README, learner/facilitator guides, Level 400 extension header |
-| Pathing language is consistent across docs/labs | Pass | No conflicting pass/fail or level-boundary wording found |
-
-## T016 - Baseline Output and Risk-Rule Validation
-Artifacts checked:
-- `labs/customer-lifecycle/level-300/output-contract.md`
-- `common/customer-lifecycle/risk-rules.md`
-- `docs/customer-lifecycle/facilitator-guide.md`
-- `labs/customer-lifecycle/level-300/foundry.md`
-
-| Required validation | Status | Evidence |
-|---|---|---|
-| Level 300 outputs include at-risk VIP/Gold + explanation + action + portfolio summary | Pass | Output contract Section 5-11 and learner/facilitator grading references |
-| Portfolio summary requires tier counts, at-risk counts, at-risk % by tier | Pass | Output contract Section A; Foundry Step 9 |
-| Risk examples cover 0/1/2/3+ signal cases | Pass | Risk rules "Example Cases" table |
-| At-risk threshold is strictly 2+ negative signals | Pass | Risk rules baseline contract and Foundry Step 7 |
+| New Foundry assumptions trace from README/guides to Foundry lab | Pass | Guides and traceability point to Foundry navigation/auth assumptions |
+| Build -> Data and Build -> Workflows expectations are mirrored in guides | Pass | Learner/facilitator include explicit navigation checkpoints |
+| 4-agent workflow and threshold checks are traceable end-to-end | Pass | Traceability FR-013/FR-014 mappings and facilitator rubric enforce completion evidence |
 
 Remediation items: None.

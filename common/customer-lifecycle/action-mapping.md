@@ -15,3 +15,14 @@ Recommended human actions tied to observed risk patterns.
 - Select one primary action bundle per at-risk VIP/Gold customer.
 - Explain action in plain business language linked to triggered signals.
 - Do not introduce predictive probability language in Level 300.
+
+## Agent 4 Synthetic News Input Contract
+- Required dataset: **`synthetic_regional_news_24m`**.
+- Allowed analysis window: **most recent 24 months only** from run date.
+- Event scope: regional events (for example natural disasters, major public events, and supply disruptions) with fictional-company references.
+- Required exception handling before action mapping:
+  - `exception_missing_region`
+  - `exception_non_fictional_company`
+  - `exception_malformed_date`
+  - `exception_stale_record`
+- Exception rows are excluded from action correlation and must be reported in validation notes.

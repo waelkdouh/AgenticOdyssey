@@ -30,6 +30,7 @@ Level 300 required build/configuration steps are not eligible for deferral.
 | C - Segment-Specific Threshold Testing | Foundry | Copilot Studio, Agent Framework |
 | D - Agent Escalation Workflow | Agent Framework | Foundry |
 | E - Offer Recommendation Playbooks | Copilot Studio | Foundry, Agent Framework |
+| F - News Scenario Expansion | Foundry | Copilot Studio, Agent Framework |
 
 ## Audience and Delivery Lens
 - **Primary executor:** technical student building the extension in a hands-on lab context.
@@ -124,6 +125,25 @@ Map risk patterns to curated offer playbooks with rationale and guardrails.
 ### Success Criteria
 - Recommendations are business-safe, human-reviewed, and traceable to signals.
 - No change to baseline classification logic.
+
+## Extension Candidate F - News Scenario Expansion
+### Objective
+Expand the synthetic news model so students can test richer event-behavior correlations beyond the baseline Foundry Agent 4.
+
+### What to Build
+- Extend synthetic regional news coverage from 24 months to a denser timeline (for example weekly event cadence where realistic).
+- Add multiple event classes (natural disasters, major public events, supply disruptions, policy changes).
+- Include fictional company impacts (for example Contoso warehouse disruption) across different regions.
+- Add event windows and confidence scoring for action recommendations.
+
+### Expected Output
+- Event catalog with reproducible generation rules.
+- Correlation table showing pre/post behavior changes by event window (for example 30-day pre vs post).
+- Short memo on when external news should override, reinforce, or not change internal lifecycle actions.
+
+### Success Criteria
+- Expanded news logic improves decision context without replacing baseline risk logic.
+- Recommendations remain explainable for business SMEs and traceable to both internal and external signals.
 
 ## Isolation and Governance Rules
 - Do not replace baseline `RISK-2PLUS-NEGATIVE-SIGNALS`.

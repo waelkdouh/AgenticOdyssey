@@ -18,6 +18,14 @@ Shared vocabulary for all customer-lifecycle labs and guides.
 | Tiers | Customer value segments: VIP, Gold, Silver, Bronze. |
 | Actions | Recommended human follow-up steps to reduce retention risk. |
 
+## Foundry 4-Agent Terminology (Level 300)
+| Agent | Canonical name | Required output/handoff |
+|---|---|---|
+| Agent 1 | RFM scoring | `agent1_rfm` with `recency_days`, `frequency_90d`, `monetary_90d` |
+| Agent 2 | Tier + health scoring | `agent2_tier_health` with `tier`, health indicators, `negative_signal_count`, `risk_status` |
+| Agent 3 | VIP recency threshold alert | `agent3_vip_recency_alerts` using `tier='VIP' AND recency_days > 60`, including threshold evidence field |
+| Agent 4 | News-based action evaluation | `agent4_news_action_eval` with event-scoped rationale and action recommendation |
+
 ## Signal Definitions (Learner Visible)
 | Signal | What it measures | Negative condition (counts toward risk) | Why it matters |
 |---|---|---|---|
@@ -31,3 +39,13 @@ Shared vocabulary for all customer-lifecycle labs and guides.
 - Level 300 baseline triage focuses on **VIP and Gold**.
 - Silver and Bronze remain in portfolio totals for context.
 - Tier naming must remain unchanged across all artifacts.
+
+## Synthetic News Dataset Scope and Exception Rules (Agent 4)
+- Dataset name must be **`synthetic_regional_news_24m`**.
+- Scope is restricted to rows with `event_date` in the **last 24 months**.
+- Rows must include regional event context and at least one fictional-company reference (for example Contoso, Fabrikam, or Northwind).
+- Exception handling:
+  - Missing region -> mark row as `exception_missing_region`; exclude from action correlation.
+  - Non-fictional company reference -> mark row as `exception_non_fictional_company`; exclude from action correlation.
+  - Malformed date -> mark row as `exception_malformed_date`; exclude from action correlation.
+  - Out-of-window/stale row (>24 months old) -> mark row as `exception_stale_record`; exclude from action correlation.

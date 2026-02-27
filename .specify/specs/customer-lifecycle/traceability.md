@@ -8,13 +8,15 @@
 | FR-003 business-language explanations | `labs/customer-lifecycle/level-300/copilot-studio.md`, `labs/customer-lifecycle/level-300/agent-framework.md`, `docs/customer-lifecycle/learner-guide.md` |
 | FR-004 recommended human actions | `common/customer-lifecycle/action-mapping.md`, `labs/customer-lifecycle/level-300/agent-framework.md`, `labs/customer-lifecycle/level-300/output-contract.md` |
 | FR-005 portfolio minimum outputs | `labs/customer-lifecycle/level-300/output-contract.md`, `labs/customer-lifecycle/level-300/foundry.md`, `docs/customer-lifecycle/facilitator-guide.md` |
-| FR-006 three progressive phases with build/config steps | `labs/customer-lifecycle/level-300/copilot-studio.md`, `labs/customer-lifecycle/level-300/foundry.md`, `labs/customer-lifecycle/level-300/agent-framework.md`, `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md` |
+| FR-006 three progressive phases with build/config steps | `labs/customer-lifecycle/level-300/copilot-studio.md`, `labs/customer-lifecycle/level-300/foundry.md` (New Foundry, Build -> Data, Build -> Workflows), `labs/customer-lifecycle/level-300/agent-framework.md`, `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md` |
 | FR-007 canonical inputs + learner-visible derived fields | `data/customer-lifecycle/derived-fields.md`, `labs/customer-lifecycle/level-300/copilot-studio.md`, `labs/customer-lifecycle/level-300/foundry.md` |
 | FR-008 Level 300 baseline + isolated Level 400 optional | `labs/customer-lifecycle/level-300/output-contract.md`, `labs/customer-lifecycle/level-400/extensions.md`, `README.md`, `docs/customer-lifecycle/learner-guide.md` |
 | FR-009 README as entry point with TOC + top-level flow | `README.md` |
 | FR-010 numbered navigate/click/type baseline guidance | `labs/customer-lifecycle/level-300/copilot-studio.md`, `labs/customer-lifecycle/level-300/foundry.md`, `labs/customer-lifecycle/level-300/agent-framework.md` |
 | FR-011 explicit L100/L200/L300/L400 boundaries | `README.md`, `common/customer-lifecycle/signal-dictionary.md`, `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md` |
 | FR-012 scope cuts deferred to Level 400 (not deleted) | `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md`, `labs/customer-lifecycle/level-400/extensions.md` |
+| FR-013 Foundry four-agent workflow (RFM, tier/health, VIP recency alert, news evaluation) | `labs/customer-lifecycle/level-300/foundry.md`, `labs/customer-lifecycle/level-300/output-contract.md`, `common/customer-lifecycle/risk-rules.md`, `docs/customer-lifecycle/learner-guide.md`, `docs/customer-lifecycle/facilitator-guide.md` |
+| FR-014 synthetic news input scope (24 months + regional events + fictional companies) | `labs/customer-lifecycle/level-300/foundry.md`, `common/customer-lifecycle/signal-dictionary.md`, `common/customer-lifecycle/action-mapping.md`, `labs/customer-lifecycle/level-400/extensions.md` |
 
 ## NFR Mapping
 | Requirement | Implementation mapping |

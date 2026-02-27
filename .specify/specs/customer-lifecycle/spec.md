@@ -31,6 +31,9 @@ As a learner with varied tool familiarity, I want explicit step-by-step guidance
 ### Story 7 - Understand Learning Levels and Expectations
 As an instructor or learner, I want clear definitions of L100, L200, L300, and L400 (including what is required vs optional), so that workshop expectations and pass/fail boundaries are unambiguous.
 
+### Story 8 - Build a Multi-Agent Foundry Workflow
+As a technical learner supporting a business SME scenario, I want Foundry to demonstrate a clear four-agent workflow (RFM, tier/health, VIP recency alert, and news-based action evaluation), so that I can connect data engineering steps to business-facing decisions.
+
 ## Functional Requirements
 - [FR-001] The feature must define a lifecycle-monitoring scenario focused on VIP and Gold customer risk in Zava’s sales context.
 - [FR-002] The feature must require identification of at-risk behavior using lifecycle signals (such as slowing order frequency, increased time since purchase, and declining spend), and must classify a customer as at-risk only when two or more negative signals are present.
@@ -38,12 +41,14 @@ As an instructor or learner, I want clear definitions of L100, L200, L300, and L
 - [FR-004] The feature must require recommended human actions (e.g., retention outreach, account follow-up, pricing/margin review, targeted offers) linked to identified risk.
 - [FR-005] The feature must require portfolio-level visibility with, at minimum, tier counts, at-risk counts, and at-risk percentage by tier.
 - [FR-006] The feature must define three progressive workshop phases aligned to repository learning flow: (1) build/configure the Copilot Studio conversational experience and run insight prompts, (2) prepare structured scoring outputs in Foundry, and (3) build/configure the Agent Framework alert workflow and run proactive alert demonstrations.
-- [FR-007] The feature must require that all core scenario inputs originate from the provided workshop dataset and narrative, with derived fields explicitly called out as learner-visible transformations.
+- [FR-007] The feature must require that all core scenario inputs originate from the provided workshop dataset and narrative (with the explicit exception of the synthetic news input defined in FR-014), and that derived fields are explicitly called out as learner-visible transformations.
 - [FR-008] The feature must support a Level 300 baseline experience that includes at-risk VIP/Gold identification, plain-language explanation, recommended action, and portfolio summary, with clearly marked Level 400 extensions that are optional and do not affect Level 300 pass/fail.
 - [FR-009] The feature must require README.md to function as the workshop entry point by including: (a) a table of contents near the top of the file, and (b) a top-level end-to-end demo flow that lists Copilot Studio, Foundry, and Agent Framework in learning order.
 - [FR-010] The feature must require numbered, step-by-step learner instructions for baseline activities that state where to navigate, what to click, and what text to enter; Copilot Studio baseline steps must be fully documented in this format.
 - [FR-011] The feature must define learning levels with explicit scope boundaries: L100 = foundational orientation, L200 = intermediate hands-on learning, L300 = advanced hands-on baseline for workshop completion (building on L100 and L200, aligned with Microsoft WWL framing), and L400 = optional complexity extensions that do not affect Level 300 pass/fail.
 - [FR-012] If classroom time requires scope cuts, non-essential enhancements must be moved to explicit Level 400 after-class extensions; required Level 300 build/configuration steps must remain in-class and must not be removed.
+- [FR-013] The Foundry phase must demonstrate a four-agent workflow with explicit agent responsibilities: (1) compute RFM, (2) compute tiers and simple health indicators, (3) apply a simple rule `VIP + recency above a documented threshold -> alert` (with that threshold explicitly stated in learner-facing guidance), and (4) run news-based short-term action evaluation that augments internal lifecycle signals.
+- [FR-014] The news-based evaluation input must be a synthetic, learner-visible dataset covering the most recent 24 months and include regional events (for example natural disasters and major public events) plus fictional company references (for example Contoso) so students can correlate behavior changes to events.
 
 ## Non-Functional Requirements
 - [NFR-001] The scenario must be understandable by non-technical learners and business leaders, prioritizing clarity over algorithmic complexity.
@@ -67,6 +72,8 @@ As an instructor or learner, I want clear definitions of L100, L200, L300, and L
 - [ ] The specification explicitly defines L100/L200/L300/L400, including L300 as the advanced baseline aligned to Microsoft WWL framing and L400 as optional complexity.
 - [ ] The specification explicitly requires learners to build/configure the Copilot Studio and Agent Framework experiences as part of the Level 300 baseline, not only run conversations on prebuilt assets.
 - [ ] The specification states that any time-constrained scope cuts are moved to Level 400 after-class extensions rather than deleted from the learning pathway.
+- [ ] The Foundry phase explicitly includes four distinct agents with outputs for RFM, tier/health, VIP alerting based on a documented recency threshold, and news-based short-term action evaluation.
+- [ ] The guidance defines synthetic news generation scope as the last 24 months and includes event-to-behavior correlation expectations with fictional company mentions.
 
 ## Out of Scope
 - Building production-grade churn prediction models or real-time enterprise integrations.
