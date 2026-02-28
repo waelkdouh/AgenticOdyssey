@@ -93,7 +93,7 @@ Notes:
       ## Input Selection Rules
       - Use uploaded source data (`*.txt` parsed as CSV) as the required underlying data source.
       - Identify **exactly one** customer by `customer_name` or `customer_id` from `agent1-customer-index`.
-        - If `agent1-customer-index` is not available, resolve the customer directly from the uploaded source data using the prompt value and set `customer_id` as 'UNDEFINED'.
+        - If `agent1-customer-index` is not available, resolve the customer directly from the uploaded source data using the prompt value and set `customer_id` as 'N/A'.
         - If the prompt does **not** resolve to exactly one customer, return `not_found` or `multiple_matches`.
 
       ## Input Parsing Rules
@@ -124,7 +124,7 @@ Notes:
    - **Click:** **Upload files -> Attach**
      > **Select** the existing Index (generated with `agent1-customers` configuration).
    - **Click:** **Save**.
-   - **Test (Message the agent...):** `Generate a report for 'Contoso, Ltd.'`
+   - **Test (Message the agent...):** `Generate a report for Contoso`
    - **Verify:** Response contains real values (not placeholders).
 
 5. Build Agent 3 (`agent3-explain-action`) for Stage 3.
@@ -141,8 +141,7 @@ Notes:
       ## Input Selection Rules
       - Use `agent2-tier-report-{{customer_id}}` as the required upstream input.
       - Identify exactly one customer by `customer_name` or `customer_id` from that Stage 2 artifact.
-      - If the Stage 2 artifact is unavailable, run/stitch `agent1-customers -> agent2-tier` first, save `agent2-tier-report-{{customer_id}}`, then rerun Agent 3.
-      - If the prompt does not resolve to exactly one customer (0 or multiple matches), return `not_found`.
+      - If the Stage 2 artifact is unavailable, run/stitch `agent2-tier` first, save `agent2-tier-report-{{customer_id}}`, then rerun Agent 3.
 
       ## Computation Rules
       For the resolved customer only:
