@@ -52,14 +52,14 @@ Notes:
       ```text
       ## Role & Task
       You are **Agent 1 (Customer Indexer)** in a multi-agent customer lifecycle workflow.  
-      Your task is to process all uploaded source files and produce a baseline list of unique customers used for downstream scoring, tiering, and alerting steps.
+      Your task is to produce a baseline list of unique customer names used for downstream scoring, tiering, and alerting steps.
 
       ## Input Selection Rules
-      - Use uploaded source data (`*.txt` parsed as CSV) as the required underlying data source.
+      - Use only `Customer Summary (sheet) - Zava Sales Data - FY2024-2026.txt` as the required underlying data source.
       - Do not use any external data sources.
 
       ## Input Parsing Rules
-      For every uploaded `*.txt` file, parse as CSV with first row as column headers, delimiter `,` and text qualifier `"` (double quote).
+      Parse the `Customer Summary` file as CSV with first row as column headers, delimiter `,` and text qualifier `"` (double quote).
 
       ## Computation Rules
       - Deduplicate customers so each customer appears once.
@@ -67,17 +67,16 @@ Notes:
       - Do **not** return example or placeholder data.
 
       ## Output Requirements
-      - Create and return **only** a markdown table as an artifact named `agent1-customer-index` with the following headers:  
-      `customer_id | customer_name`
-      - Create one output row per unique customer/company.
+      - Create and return **only** a single top-level JSON object as an artifact using this structure: `{"customers":["customer1","customer2","..."]}`, which includes one string per unique customer/company inside `customers`.
+      - Return exactly one top-level object only (no wrapper keys such as `queries`, `input`, or `data`, and no second JSON block).
       - Do **not** include any additional commentary or notes.
       ```
 
    - **Click:** **Upload files -> Attach**
-     > **Drag and Drop** the files in `.\data\exported-sheets\`.
+     > **Select** `Customer Summary (sheet) - Zava Sales Data - FY2024-2026.txt` from `.\data\exported-sheets\`.
    - **Click:** **Save**.
    - **Test (Message the agent...):** `Return the customer list.`
-   - **Verify:** Output contains unique customer rows with no duplicates.
+   - **Verify:** Output is a top-level JSON object containing a `customers` array of unique customer-name strings and no duplicates.
 
 4. Build Agent 2 (`agent2-tier`) for Stage 2.
    - **Click:** **Build -> Agent -> Create Agent**.
@@ -92,9 +91,9 @@ Notes:
 
       ## Input Selection Rules
       - Use uploaded source data (`*.txt` parsed as CSV) as the required underlying data source.
-      - Identify **exactly one** customer by `customer_name` or `customer_id` from `agent1-customer-index`.
-        - If `agent1-customer-index` is not available, resolve the customer directly from the uploaded source data using the prompt value and set `customer_id` as 'N/A'.
-        - If the prompt does **not** resolve to exactly one customer, return `not_found` or `multiple_matches`.
+      - Identify **exactly one** customer by `customer_name` from a provided customers JSON object (for example, {"customers":["Contoso","Fabrikam"]}`).
+         - If a customers JSON object is not available, resolve the customer directly from the uploaded `Customer Survey` CSV file using the prompt value as the search key.
+         - If the prompt does **not** resolve to exactly one customer, choose to return either `not_found` or `multiple_matches`.
 
       ## Input Parsing Rules
       For every uploaded `*.txt` file, parse as CSV with first row as column headers, delimiter `,` and text qualifier `"` (double quote).
@@ -116,8 +115,8 @@ Notes:
       - Do **not** return example or placeholder data.
 
       ## Output Requirements
-      - Create and return **only** a markdown table with the following headers as an artifact named `agent2-tier-report-{{customer_id}}`
-      `customer_id | customer_name | recency_days | frequency_90d | monetary_90d | rfm_window_days | rfm_run_timestamp | tier | triggered_signals | negative_signal_count | risk_status | risk_gate_rule_text`
+      - Create and return **only** a single JSON object as an artifact that includes these properties: `customer_name`, `recency_days`, `frequency_90d`, `monetary_90d`, `rfm_window_days`, `rfm_run_timestamp`, `tier`, `triggered_signals`, `negative_signal_count`, `risk_status`, `risk_gate_rule_text`.
+      - Return exactly one top-level object only (no wrapper keys such as `queries`, `input`, or `data`, and no second JSON block).
       - Do **not** include any additional commentary or notes.
       ```
 
@@ -125,7 +124,7 @@ Notes:
      > **Select** the existing Index (generated with `agent1-customers` configuration).
    - **Click:** **Save**.
    - **Test (Message the agent...):** `Generate a report for Contoso`
-   - **Verify:** Response contains real values (not placeholders).
+   - **Verify:** Response is a single JSON object with real values (not placeholders).
 
 5. Build Agent 3 (`agent3-explain-action`) for Stage 3.
    - **Click:** **Build -> Agent -> Create Agent**.
@@ -139,9 +138,9 @@ Notes:
       Your task is to process **exactly one customer per run** and produce a plain-language risk explanation plus recommended action from Stage 2 outputs.
 
       ## Input Selection Rules
-      - Use `agent2-tier-report-{{customer_id}}` as the required upstream input.
-      - Identify exactly one customer by `customer_name` or `customer_id` from that Stage 2 artifact.
-      - If the Stage 2 artifact is unavailable, run/stitch `agent2-tier` first, save `agent2-tier-report-{{customer_id}}`, then rerun Agent 3.
+      - Use a provided Stage 2 JSON object output from `agent2-tier` as the required upstream input (for example `agent2-tier-report`).
+      - Identify exactly one customer by `customer_name` from that Stage 2 JSON object.
+      - If a Stage 2 JSON object is unavailable, run/stitch `agent2-tier` first, save `agent2-tier-report`, then rerun Agent 3.
 
       ## Computation Rules
       For the resolved customer only:
@@ -152,43 +151,46 @@ Notes:
       - Do **not** return example or placeholder data.
 
       ## Output Requirements
-      - Create and return **only** a markdown table as artifact `stage3_explain_action` with headers:
-      `customer_id | tier | risk_explanation_plain | action_recommendation | action_rationale | action_mapping_version | derived_from_stage2_artifact`
+      - Create and return **only** a single JSON object as artifact `stage3_explain_action`.
+      - Include these properties: `customer_name`, `tier`, `risk_explanation_plain`, `action_recommendation`, `action_rationale`, `action_mapping_version`, `derived_from_stage2_artifact`.
+      - Return exactly one top-level object only (no wrapper keys such as `queries`, `input`, or `data`, and no second JSON block).
       - Do **not** include additional commentary or notes.
       ```
 
-   - **Click:** **Upload files -> Attach**
-     > **Select** `agent2-tier-report-{{customer_id}}` for the target customer (generate via `agent1-customers -> agent2-tier` workflow first if needed).
    - **Click:** **Save**.
    - **Test (Message the agent...):** `Return stage3_explain_action row for customer_name='Contoso, Ltd.' with risk_explanation_plain, action_recommendation, and action_rationale.`
-   - **Verify:** Explanation is business-readable and action is explicit.
+   - **Verify:** Response is a single JSON object and the explanation/action fields are explicit and business-readable.
 
-6. Build Agent 4 (`agent4-portfolio-summary`) for Stage 4.
+6. Build Agent 0 (`agent0-orchestrator`) for workflow orchestration.
+   - **Click:** **Build -> Agent -> Create Agent**.
+   - **Type:** Name `agent0-orchestrator`.
+   - **Type (instructions):** `Call agent1-customers first to produce the full customer list ('agent1-customer-index'). Iterate through that list and, for each customer, call agent2-tier to generate 'agent2-tier-report', then immediately chain to agent3-explain-action to generate 'stage3_explain_action'. Save each stage artifact before continuing to the next customer.`
+   - **Click:** **Save**.
+   - **Verify:** `agent0-orchestrator` appears in the agent list.
+
+7. Create first workflow and wire initial agent chain.
+   - **Click:** **Build -> Workflows -> Create (Sequential) -> Save**.
+   - **Type:** Name `vip-lifecycle-management-flow`.
+   - **Wire (first pass):**
+     - `agent1-customers` -> `agent2-tier` -> `agent3-explain-action`
+   - **Prerequisite:** Ensure `agent1-customer-index` is available as input for `agent2-tier`.
+   - **Verify:** Workflow runs through Stage 3 and outputs `stage3_explain_action`.
+
+8. Build Agent 4 (`agent4-portfolio-summary`) for Stage 4.
    - **Click:** **Build -> Agent -> Create Agent**.
    - **Type:** Name `agent4-portfolio-summary`.
    - **Type (instructions):** `Aggregate agent2-tier-report-{{customer_id}} into stage4_portfolio_summary with tier_count, at_risk_count, and at_risk_pct by tier plus required evidence fields.`
    - **Click:** **Save**.
+   - **Update workflow:** Append `agent4-portfolio-summary` after `agent3-explain-action`.
    - **Test (Message the agent...):** `Return stage4_portfolio_summary for all tiers.`
    - **Verify:** Tier counts, at-risk counts, and at-risk % are present.
 
-7. (Optional) Enable Stage 5 news enrichment in Agent 3.
+9. (Optional) Enable Stage 5 news enrichment in Agent 3.
    - **Type:** In `agent3-explain-action`, enable enrichment mode using `synthetic_regional_news_24m`.
    - **Type:** Ensure output includes `stage5_news_enrichment` fields when enrichment is used.
    - **Verify:** Enrichment rows include `news_dataset_name`, `scope_window_months`, `event_scope_status`, and `news_exception_code`.
 
-8. Create workflow and wire agent chain.
-   - **Click:** **Build -> Workflows -> Create (Sequential)**.
-   - **Type:** Name `vip-lifecycle-management-flow`.
-   - **Prerequisite:** Ensure `agent1-customer-index` is available as input for `agent2-tier`.
-   - **Wire (default 4-agent):**
-     - `agent1-customers` -> `agent2-tier` -> `agent3-explain-action` -> `agent4-portfolio-summary`
-   - **Wire (if 3-agent variant):**
-     - Keep `agent1-customers` first, then merge Stage 3 + Stage 4 responsibilities while preserving required artifacts.
-   - **Wire (if 5-agent variant):**
-     - Add an optional helper between `agent2-tier` and `agent3-explain-action`.
-   - **Verify:** Total agent count is between 3 and 5.
-
-9. Run workflow (primary path) and save artifacts.
+10. Run workflow (primary path) and save artifacts.
    - **Click:** Run workflow.
    - **Type:** Save outputs as stage artifacts:
       - `agent1-customer-index`
@@ -198,25 +200,25 @@ Notes:
      - `stage5_news_enrichment` (if used)
    - **Verify:** Artifacts exist and required fields/evidence are populated per `output-contract.md`.
 
-10. Run required validation checks.
+11. Run required validation checks.
     - **Named-customer spot-check (required):**
       - Trace `Contoso, Ltd.` from Stage 2 -> Stage 3 (and Stage 5 if used).
    - **Customer index check (required):**
-      - Verify `agent1-customer-index` contains unique `customer_id` + `customer_name` rows.
+      - Verify `agent1-customer-index` contains a unique `customers` array of customer-name strings.
    - **Aggregate artifact check (required):**
      - Validate Stage 4 tier counts, at-risk counts, and at-risk % by tier.
    - **Verify:** Outputs cover identification, explanation, action, and portfolio summary with source-derived values.
 
-11. Apply failure handling if needed.
-   - `guardrail_blocked` -> switch to fallback path (Step 12), then re-run Step 10.
+12. Apply failure handling if needed.
+   - `guardrail_blocked` -> switch to fallback path (Step 13), then re-run Step 11.
    - `placeholder_output` -> rerun failed stage with source-only and explicit field constraints.
    - `missing_required_fields` -> mark artifact `needs rework`, rerun failed stage and downstream stages.
 
-12. Guardrail-safe fallback path (artifact-first).
+13. Guardrail-safe fallback path (artifact-first).
    - **Run stages individually** in Workflows/Artifacts (avoid full-table chat response requests).
    - **Validate each stage artifact** before moving to the next stage.
    - **Assemble final outputs** from saved artifacts.
-   - **Re-run Step 10 checks** and keep the same evidence set.
+   - **Re-run Step 11 checks** and keep the same evidence set.
 
 ## Timebox Guidance
 1. **0-10 min:** Data setup + create first two agents.
