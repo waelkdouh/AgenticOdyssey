@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2026-02-20",
+    "store_id": "Store-001",
+    "chickens_bought": 138,
+    "purchase_cost_usd": 276,
+    "chickens_sold_total": 96,
+    "sales_revenue_usd": 480,
+    "gross_profit_usd": 204
+  },
+  {
+    "date": "2026-02-21",
+    "store_id": "Store-001",
+    "chickens_bought": 152,
+    "purchase_cost_usd": 304,
+    "chickens_sold_total": 111,
+    "sales_revenue_usd": 555,
+    "gross_profit_usd": 251
+  },
+  {
+    "date": "2026-02-22",
+    "store_id": "Store-001",
+    "chickens_bought": 119,
+    "purchase_cost_usd": 238,
+    "chickens_sold_total": 85,
+    "sales_revenue_usd": 425,
+    "gross_profit_usd": 187
+  },
+  {
+    "date": "2026-02-23",
+    "store_id": "Store-001",
+    "chickens_bought": 143,
+    "purchase_cost_usd": 286,
+    "chickens_sold_total": 106,
+    "sales_revenue_usd": 530,
+    "gross_profit_usd": 244
+  },
+  {
+    "date": "2026-02-24",
+    "store_id": "Store-001",
+    "chickens_bought": 152,
+    "purchase_cost_usd": 304,
+    "chickens_sold_total": 104,
+    "sales_revenue_usd": 520,
+    "gross_profit_usd": 216
+  },
+  {
+    "date": "2026-02-25",
+    "store_id": "Store-001",
+    "chickens_bought": 145,
+    "purchase_cost_usd": 290,
+    "chickens_sold_total": 107,
+    "sales_revenue_usd": 535,
+    "gross_profit_usd": 245
+  },
+  {
+    "date": "2026-02-26",
+    "store_id": "Store-001",
+    "chickens_bought": 132,
+    "purchase_cost_usd": 264,
+    "chickens_sold_total": 100,
+    "sales_revenue_usd": 500,
+    "gross_profit_usd": 236
+  },
+  {
+    "date": "2026-02-27",
+    "store_id": "Store-001",
+    "chickens_bought": 172,
+    "purchase_cost_usd": 344,
+    "chickens_sold_total": 130,
+    "sales_revenue_usd": 650,
+    "gross_profit_usd": 306
+  },
+  {
+    "date": "2026-02-28",
+    "store_id": "Store-001",
+    "chickens_bought": 147,
+    "purchase_cost_usd": 294,
+    "chickens_sold_total": 107,
+    "sales_revenue_usd": 535,
+    "gross_profit_usd": 241
+  },
+  {
+    "date": "2026-03-01",
+    "store_id": "Store-001",
+    "chickens_bought": 146,
+    "purchase_cost_usd": 292,
+    "chickens_sold_total": 115,
+    "sales_revenue_usd": 575,
+    "gross_profit_usd": 283
+  }
+]
