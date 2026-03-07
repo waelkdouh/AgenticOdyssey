@@ -251,3 +251,6 @@ az group delete --name agenticodyssey-rg --yes --no-wait
 | MCP script fails with image pull error | Verify image tag: `ghcr.io/lapate/agenticodyssey/mcp-server:latest` is public |
 | Search script fails with `jq not found` | Run `sudo apt install -y jq` first |
 | Container IP shows as empty | Wait 30 seconds and re-run: `az container show --resource-group <rg> --name <name> --query ipAddress.ip -o tsv` |
+
+
+![alt text](/docs/diagram.png)s
