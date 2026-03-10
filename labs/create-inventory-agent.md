@@ -32,7 +32,7 @@ Before starting, make sure you have:
 1. Go to **[https://ai.azure.com](https://ai.azure.com)** and sign in with your Azure credentials.
 2. In the left navigation, select your **Hub** and then your **Project**.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the Azure AI Foundry home page showing your project selected in the left nav.
+![alt text](/docs/azure_project.png)
 
 ---
 
@@ -41,7 +41,7 @@ Before starting, make sure you have:
 1. In the left sidebar, under **Build**, click **Agents**.
 2. You will see the Agents playground with any existing agents listed.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the Agents section showing the empty or existing agents list.
+![alt text](/docs/new_agent.png)
 
 ---
 
@@ -50,7 +50,7 @@ Before starting, make sure you have:
 1. Click **+ New agent** (or **+ Create**).
 2. A new agent configuration panel will open on the right.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the new agent panel just after clicking "+ New agent", before filling anything in.
+![alt text](/docs/new_agent_name.png)
 
 ---
 
@@ -61,11 +61,11 @@ Before starting, make sure you have:
    ZavaGroceriesInventoryAgent
    ```
 
-2. Under **Model**, select **`gpt-4o`** (or the model your instructor specifies).
+2. Under **Model**, select **`gpt-5-mini`** (or the model your instructor specifies).
 
 3. Leave the **Deployment** set to the default deployment for that model.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot showing the agent name and model selection filled in.
+![alt text](/docs/new_agent_filled_in.png)
 
 ---
 
@@ -91,10 +91,9 @@ When answering questions:
 - Be concise but complete in your responses
 
 Available stores: Store-001
-Available dates in system: 2026-02-20 through 2026-02-28 (use list tools to discover exact records)
 ```
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the Instructions box with the full system prompt entered.
+![alt text](/docs/instructions.png)
 
 ---
 
@@ -106,7 +105,7 @@ This is the key step — connecting your live MCP server so the agent has access
 2. Click **+ Add tool** (or **+ Add action**).
 3. Select **MCP Server** from the tool type list.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the "Add tool" dropdown with MCP Server visible as an option.
+![alt text](/docs/mcp_server.png)
 
 4. In the **Server URL** field, enter your MCP SSE endpoint:
    ```
@@ -133,7 +132,8 @@ This is the key step — connecting your live MCP server so the agent has access
 
 6. Click **Save** or **Confirm** to add the MCP server.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot showing the 10 MCP tools successfully loaded in the Tools section.
+
+![alt text](/docs/mcp_tools_new.png)
 
 ---
 
@@ -142,7 +142,7 @@ This is the key step — connecting your live MCP server so the agent has access
 1. Click **Save** (or **Apply**) to save your agent configuration.
 2. Note the **Agent ID** shown in the panel — you will need this in later labs.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the saved agent configuration showing the Agent ID.
+![alt text](/docs/agent_id.png)
 
 ---
 
@@ -150,13 +150,13 @@ This is the key step — connecting your live MCP server so the agent has access
 
 With the agent saved, test it in the chat panel on the right side of the playground.
 
-### Test 1 — List all daily records
+### Test 1 — List all the tools
 ```
-Show me all the daily financial records you have access to.
+Can you list the tools you have access to?
 ```
 **Expected:** The agent calls `list_daily_financials`, returns 10 records with dates, store IDs, and financial figures.
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the agent's response to this query, including the tool call visible in the trace.
+![alt text](/docs/list_of_tools.png)
 
 ---
 
@@ -165,6 +165,10 @@ Show me all the daily financial records you have access to.
 What were the financials for Store-001 on February 22nd, 2026?
 ```
 **Expected:** The agent calls `list_daily_financials` with `date="2026-02-22"` and `store_id="Store-001"` and returns the record.
+
+🤔 NOTE: You may need to approve the tool.
+
+![alt text](/docs/approve_tool.png)
 
 ---
 
