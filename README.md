@@ -32,7 +32,7 @@ By the end of setup you will have:
 2. Click the green **`<> Code`** button → select the **Codespaces** tab
 3. Click **"Create codespace on main"**
 
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the GitHub repository page with the **Code → Codespaces** dropdown open, showing the "Create codespace on main" button.
+![alt text](/docs/create_codespace_on_main.png)
 
 The codespace will open in a browser-based VS Code window. The very first time it loads it will automatically run the environment setup script — you will see terminal activity at the bottom of the screen.
 
@@ -48,8 +48,6 @@ The devcontainer is configured to automatically run `scripts/setup.sh` after the
 - Installs all Python dependencies from `requirements.txt`
 
 **Wait for the terminal to finish and show no errors before proceeding.**
-
-> 📸 **HUMAN — DO THIS:** Take a screenshot of the VS Code terminal after `scripts/setup.sh` completes successfully (green output / no errors visible).
 
 ---
 
@@ -180,10 +178,8 @@ sudo apt install -y jq
 ### 5c. Run the script
 
 ```bash
-bash "scripts/create -azure-ai-search.sh"
+bash scripts/create-azure-ai-search.sh
 ```
-
-> ⚠️ Note the quotes around the script path — the filename contains a space.
 
 The script will:
 1. Create a resource group (reuses the existing one if it already exists)
