@@ -38,7 +38,7 @@ Before starting, make sure you have:
 
 ## Step 2: Navigate to the Agents Playground
 
-1. In the left sidebar, under **Build**, click **Agents**.
+1. In the left sidebar, under **Build**, click **Agents**.Make sure the Build tab is also selected on the top menu if you don't see the build option.
 2. You will see the Agents playground with any existing agents listed.
 
 ![alt text](/docs/new_agent.png)
@@ -94,6 +94,8 @@ Available stores: Store-001
 ```
 
 ![alt text](/docs/instructions.png)
+
+Remember to hit the save button at the top right.
 
 ---
 
